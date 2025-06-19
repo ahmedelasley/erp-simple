@@ -3,6 +3,11 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Illuminate\Support\Facades\Route;
+use Livewire\Livewire;
+
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +24,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Livewire::setUpdateRoute(function ($handle) {
+            return Route::post('/livewire/update', $handle)
+            ->prefix(LaravelLocalization::setLocale())
+                ->middleware(['web', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath']); // Add your custom middleware here
+        });
+
+        Paginator::useBootstrapFive();
     }
 }
