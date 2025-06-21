@@ -1,0 +1,11 @@
+{
+    "name": "System",
+    "alias": "core.system",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\\\Core\\\\System\\Providers\\SystemServiceProvider"
+    ],
+    "files": []
+}
