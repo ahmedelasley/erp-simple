@@ -27,6 +27,10 @@ class CoreServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->name, 'database/migrations'));
+        // Blade::componentNamespace('Modules\\Core\\System\\View\\Components', 'core.system');
+
+        // Blade::componentNamespace('Modules\\Core\\View\\Components', 'core');
+
     }
 
     /**
