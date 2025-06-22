@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\Core\View\Components\Form\Partials;
+namespace Modules\Core\View\Components\Form\Fields;
 
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
-class Input extends Component
+class Label extends Component
 {
     /**
      * Create a new component instance.
@@ -17,6 +17,6 @@ class Input extends Component
      */
     public function render(): View|string
     {
-        return view('core::components.form.partials.input');
+        return view('core::components.form.fields.label');
     }
 }

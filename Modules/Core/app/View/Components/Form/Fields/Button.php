@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\Core\View\Components\Form\Partials;
+namespace Modules\Core\View\Components\Form\Fields;
 
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
-class CheckBox extends Component
+class Button extends Component
 {
     /**
      * Create a new component instance.
@@ -17,6 +17,6 @@ class CheckBox extends Component
      */
     public function render(): View|string
     {
-        return view('core::components.form.partials.checkbox');
+        return view('core::components.form.fields.button');
     }
 }

@@ -29,24 +29,25 @@
                                             <form method="POST" action="{{ route('register') }}">
                                                 @csrf
 												<div class="form-group">
-													<label>{{ __('Full Name') }}</label>
-                                                    <input class="form-control" placeholder="Enter your Full Name" type="text" name="name" value="{{old('name')}}" required autofocus autocomplete="name">
-                                                    {{-- <x-input-error :messages="$errors->get('name')" class="mt-2" /> --}}
+													{{-- <label>{{ __('Full Name') }}</label> --}}
+                                                    {{-- <input class="form-control" placeholder="Enter your Full Name" type="text" name="name" value="{{old('name')}}"  autofocus autocomplete="name"> --}}
+                                                    <x-core::form.fields.input-label-error name="name" placeholder="Enter Full Name"  label="{{ __('Full Name') }}"/>
+                                                    <x-core::form.fields.input-error :messages="$errors->get('name')" class=""/>
 												</div>
 												<div class="form-group">
 													<label>{{ __('Email') }}</label>
-                                                    <input class="form-control" placeholder="Enter your email" type="email"  name="email" value="{{old('email')}}" required autocomplete="username">
-                                                    {{-- <x-input-error :messages="$errors->get('email')" class="mt-2" /> --}}
+                                                    <input class="form-control" placeholder="Enter your email" type="email"  name="email" value="{{old('email')}}" autocomplete="username" >
+                                                    <x-core::form.fields.input-error :messages="$errors->get('email')" class="mt-2" />
 												</div>
 												<div class="form-group">
 													<label>{{ __('Password') }}</label>
-                                                    <input class="form-control" placeholder="Enter your password" type="password" name="password" required autocomplete="new-password">
-                                                    {{-- <x-input-error :messages="$errors->get('password')" class="mt-2" /> --}}
+                                                    <input class="form-control" placeholder="Enter your password" type="password" name="password"  autocomplete="new-password">
+                                                    <x-core::form.fields.input-error :messages="$errors->get('password')" class="mt-2" />
 												</div>
                                                 <div class="form-group">
 													<label>{{ __('Confirm Password') }}</label>
-                                                    <input class="form-control" placeholder="Enter your password confirmation" type="password" name="password_confirmation" required autocomplete="new-password" >
-                                                    {{-- <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" /> --}}
+                                                    <input class="form-control" placeholder="Enter your password confirmation" type="password" name="password_confirmation"  autocomplete="new-password" >
+                                                    <x-core::form.fields.input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
 												</div>
                                                 <button class="btn btn-main-primary btn-block">{{ __('Create Account') }}</button>
 												<div class="row row-xs">

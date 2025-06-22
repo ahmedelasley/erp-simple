@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Core\View\Components\Form\Partials;
+namespace Modules\Core\View\Components\Form\Fields;
 
 use Illuminate\View\Component;
 use Illuminate\View\View;
@@ -17,6 +17,6 @@ class RadioButton extends Component
      */
     public function render(): View|string
     {
-        return view('core::components.form.partials.radio-button');
+        return view('core::components.form.fields.radio-button');
     }
 }

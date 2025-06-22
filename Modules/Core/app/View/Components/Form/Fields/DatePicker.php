@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\Core\View\Components\Form\Partials;
+namespace Modules\Core\View\Components\Form\Fields;
 
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
-class Button extends Component
+class DatePicker extends Component
 {
     /**
      * Create a new component instance.
@@ -17,6 +17,6 @@ class Button extends Component
      */
     public function render(): View|string
     {
-        return view('core::components.form.partials.button');
+        return view('core::components.form.fields.date-picker');
     }
 }
