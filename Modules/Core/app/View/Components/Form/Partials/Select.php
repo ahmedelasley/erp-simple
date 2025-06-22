@@ -17,6 +17,6 @@ class Select extends Component
      */
     public function render(): View|string
     {
-        return view('core::components.form/partials/select');
+        return view('core::components.form.partials.select');
     }
 }

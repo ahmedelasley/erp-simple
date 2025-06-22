@@ -17,6 +17,6 @@ class DeleteForm extends Component
      */
     public function render(): View|string
     {
-        return view('core::components.form/deleteform');
+        return view('core::components.form.delete-form');
     }
 }

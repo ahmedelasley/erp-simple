@@ -17,6 +17,6 @@ class ButtonSubmit extends Component
      */
     public function render(): View|string
     {
-        return view('core::components.form/partials/buttonsubmit');
+        return view('core::components.form.partials.button-submit');
     }
 }

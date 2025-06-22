@@ -17,6 +17,6 @@ class Input extends Component
      */
     public function render(): View|string
     {
-        return view('core::components.form/partials/input');
+        return view('core::components.form.partials.input');
     }
 }

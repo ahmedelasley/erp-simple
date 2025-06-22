@@ -17,6 +17,6 @@ class CreateForm extends Component
      */
     public function render(): View|string
     {
-        return view('core::components.form/createform');
+        return view('core::components.form.create-form');
     }
 }

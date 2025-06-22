@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\Core\View\Components\Partials;
+namespace Modules\Core\View\Components\Form\Partials;
 
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
-class EnumLabel extends Component
+class InputError extends Component
 {
     /**
      * Create a new component instance.
@@ -17,6 +17,6 @@ class EnumLabel extends Component
      */
     public function render(): View|string
     {
-        return view('core::components.partials.enum-label');
+        return view('core::components.form.partials.input-error');
     }
 }

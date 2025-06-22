@@ -17,6 +17,6 @@ class DatePicker extends Component
      */
     public function render(): View|string
     {
-        return view('core::components.form/partials/datepicker');
+        return view('core::components.form.partials.datepicker');
     }
 }

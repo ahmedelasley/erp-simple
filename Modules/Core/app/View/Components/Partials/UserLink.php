@@ -17,6 +17,6 @@ class UserLink extends Component
      */
     public function render(): View|string
     {
-        return view('core::components.partials/userlink');
+        return view('core::components.partials.user-link');
     }
 }

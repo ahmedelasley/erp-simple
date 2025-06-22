@@ -17,6 +17,6 @@ class DateFormat extends Component
      */
     public function render(): View|string
     {
-        return view('core::components.partials/dateformat');
+        return view('core::components.partials.date-format');
     }
 }

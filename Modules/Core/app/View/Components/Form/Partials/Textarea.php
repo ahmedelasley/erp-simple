@@ -17,6 +17,6 @@ class Textarea extends Component
      */
     public function render(): View|string
     {
-        return view('core::components.form/partials/textarea');
+        return view('core::components.form.partials.textarea');
     }
 }

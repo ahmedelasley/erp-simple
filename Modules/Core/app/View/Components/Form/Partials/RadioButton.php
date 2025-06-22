@@ -17,6 +17,6 @@ class RadioButton extends Component
      */
     public function render(): View|string
     {
-        return view('core::components.form/partials/radiobutton');
+        return view('core::components.form.partials.radio-button');
     }
 }

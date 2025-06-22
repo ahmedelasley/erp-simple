@@ -17,6 +17,6 @@ class GetData extends Component
      */
     public function render(): View|string
     {
-        return view('core::components.getdata');
+        return view('core::components.get-data');
     }
 }

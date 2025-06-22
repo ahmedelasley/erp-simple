@@ -17,6 +17,6 @@ class StatusBadge extends Component
      */
     public function render(): View|string
     {
-        return view('core::components.partials/statusbadge');
+        return view('core::components.partials.status-badge');
     }
 }

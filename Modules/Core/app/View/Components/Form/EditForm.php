@@ -17,6 +17,6 @@ class EditForm extends Component
      */
     public function render(): View|string
     {
-        return view('core::components.form/editform');
+        return view('core::components.form.edit-form');
     }
 }

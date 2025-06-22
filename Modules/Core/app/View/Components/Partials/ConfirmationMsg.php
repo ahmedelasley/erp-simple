@@ -17,6 +17,6 @@ class ConfirmationMsg extends Component
      */
     public function render(): View|string
     {
-        return view('core::components.partials/confirmationmsg');
+        return view('core::components.partials.confirmation-msg');
     }
 }

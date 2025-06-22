@@ -17,6 +17,6 @@ class Label extends Component
      */
     public function render(): View|string
     {
-        return view('core::components.form/partials/label');
+        return view('core::components.form.partials.label');
     }
 }

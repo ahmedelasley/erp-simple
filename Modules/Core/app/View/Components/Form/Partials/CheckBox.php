@@ -17,6 +17,6 @@ class CheckBox extends Component
      */
     public function render(): View|string
     {
-        return view('core::components.form/partials/checkbox');
+        return view('core::components.form.partials.checkbox');
     }
 }
