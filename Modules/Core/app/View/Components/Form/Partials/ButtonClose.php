@@ -17,6 +17,6 @@ class ButtonClose extends Component
      */
     public function render(): View|string
     {
-        return view('core::components.form/partials/buttonclose');
+        return view('core::components.form.partials.button-close');
     }
 }

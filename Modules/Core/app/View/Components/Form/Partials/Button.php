@@ -17,6 +17,6 @@ class Button extends Component
      */
     public function render(): View|string
     {
-        return view('core::components.form/partials/button');
+        return view('core::components.form.partials.button');
     }
 }
