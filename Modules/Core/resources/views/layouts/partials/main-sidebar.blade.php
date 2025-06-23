@@ -23,18 +23,6 @@
         </div>
         <ul class="side-menu">
 
-            @include('dashboard::layouts.partials.menu')
-           {{--  @include('supplier::layouts.partials.menu')
-            @include('warehouse::layouts.partials.menu')
-            @include('material::layouts.partials.menu')
-            @include('product::layouts.partials.menu')
-            @include('extra::layouts.partials.menu')
-            @include('setting::layouts.partials.menu') --}}
-
-            {{-- <x-slides.slide-menu :value="__(key: 'Charts')">
-                <x-slides.slide-item :value="__(key: 'Morris Charts')" :route="route('dashboard.index')" />
-                <x-slides.slide-item :value="__(key: 'Flot Charts')" :route="route('dashboard.index')" />
-            </x-slides.slide-menu> --}}
 
         </ul>
     </div>
