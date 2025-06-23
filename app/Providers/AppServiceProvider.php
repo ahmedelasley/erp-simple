@@ -9,6 +9,12 @@ use Livewire\Livewire;
 
 use Illuminate\Pagination\Paginator;
 
+
+use Illuminate\Support\Facades\Blade;
+use Nwidart\Modules\Facades\Module;
+use Modules\Core\Helpers\ModuleHelper;
+
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -31,5 +37,13 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Paginator::useBootstrapFive();
+
+
+        // Blade directive to check if a module is enabled
+        Blade::if('module', function ($moduleName) {
+            // return Module::has($moduleName) && Module::find($moduleName)->isEnabled();
+            return ModuleHelper::isEnabled($moduleName);
+
+        });
     }
 }

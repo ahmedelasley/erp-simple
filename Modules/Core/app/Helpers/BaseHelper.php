@@ -1,8 +1,10 @@
 <?php
 
-namespace Modules\Core\Helpers;
+use Modules\Core\Helpers\ModuleHelper;
 
-class BaseHelper
-{
-    public function handle() {}
-}
+    if (!function_exists('module_is_enabled')) {
+        function module_is_enabled(string $moduleName): bool
+        {
+            return ModuleHelper::isEnabled($moduleName);
+        }
+    }

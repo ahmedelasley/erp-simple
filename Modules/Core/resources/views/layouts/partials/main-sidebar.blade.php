@@ -2,10 +2,10 @@
 <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
 <aside class="app-sidebar sidebar-scroll">
     <div class="main-sidebar-header active">
-        <a class="desktop-logo logo-light active" href="{{ route('dashboard') }}"><img src="{{URL::asset('assets/back/img/brand/logo.png')}}" class="main-logo" alt="logo"></a>
-        <a class="desktop-logo logo-dark active" href="{{ route('dashboard') }}"><img src="{{URL::asset('assets/back/img/brand/logo-white.png')}}" class="main-logo dark-theme" alt="logo"></a>
-        <a class="logo-icon mobile-logo icon-light active" href="{{ route('dashboard') }}"><img src="{{URL::asset('assets/back/img/brand/favicon.png')}}" class="logo-icon" alt="logo"></a>
-        <a class="logo-icon mobile-logo icon-dark active" href="{{ route('dashboard') }}"><img src="{{URL::asset('assets/back/img/brand/favicon-white.png')}}" class="logo-icon dark-theme" alt="logo"></a>
+        <a class="desktop-logo logo-light active" href="{{ route('dashboard.index') }}"><img src="{{URL::asset('assets/back/img/brand/logo.png')}}" class="main-logo" alt="logo"></a>
+        <a class="desktop-logo logo-dark active" href="{{ route('dashboard.index') }}"><img src="{{URL::asset('assets/back/img/brand/logo-white.png')}}" class="main-logo dark-theme" alt="logo"></a>
+        <a class="logo-icon mobile-logo icon-light active" href="{{ route('dashboard.index') }}"><img src="{{URL::asset('assets/back/img/brand/favicon.png')}}" class="logo-icon" alt="logo"></a>
+        <a class="logo-icon mobile-logo icon-dark active" href="{{ route('dashboard.index') }}"><img src="{{URL::asset('assets/back/img/brand/favicon-white.png')}}" class="logo-icon dark-theme" alt="logo"></a>
     </div>
     <div class="main-sidemenu">
         <div class="app-sidebar__user clearfix">
@@ -30,8 +30,8 @@
             @include('setting::layouts.partials.menu') --}}
 
             {{-- <x-slides.slide-menu :value="__(key: 'Charts')">
-                <x-slides.slide-item :value="__(key: 'Morris Charts')" :route="route('dashboard')" />
-                <x-slides.slide-item :value="__(key: 'Flot Charts')" :route="route('dashboard')" />
+                <x-slides.slide-item :value="__(key: 'Morris Charts')" :route="route('dashboard.index')" />
+                <x-slides.slide-item :value="__(key: 'Flot Charts')" :route="route('dashboard.index')" />
             </x-slides.slide-menu> --}}
 
         </ul>
