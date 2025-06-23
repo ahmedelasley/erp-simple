@@ -5,7 +5,7 @@ namespace Modules\Core\View\Components\SlideMenu;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
-class Slide-Section extends Component
+class SlideSection extends Component
 {
     /**
      * Create a new component instance.
@@ -17,6 +17,6 @@ class Slide-Section extends Component
      */
     public function render(): View|string
     {
-        return view('core::components.slidemenu/slide-section');
+        return view('core::components.slides.slide-section');
     }
 }
