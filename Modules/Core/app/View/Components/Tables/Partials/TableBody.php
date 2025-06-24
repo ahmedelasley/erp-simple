@@ -1,27 +1,22 @@
 <?php
 
-namespace Modules\Core\View\Components\Partials;
+namespace Modules\Core\View\Components\Tables\Partials;
 
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
-class EnumLabel extends Component
+class TableBody extends Component
 {
-    public $enum;
     /**
      * Create a new component instance.
      */
+    public function __construct() {}
 
-    public function __construct($enum)
-    {
-        $this->enum = $enum;
-    }
-    
     /**
      * Get the view/contents that represent the component.
      */
     public function render(): View|string
     {
-        return view('core::components.partials.enum-label');
+        return view('core::components.tables.partials.table-body');
     }
 }

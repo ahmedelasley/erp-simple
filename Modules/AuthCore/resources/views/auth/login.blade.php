@@ -22,29 +22,28 @@
 										<div class="card-sigin">
 											<div class="main-signup-header">
 												<h2>Welcome back!</h2>
-												<h5 class="font-weight-semibold mb-4">Please sign in to continue.</h5>
+												<h5 class="font-weight-semibold mb-4">{{ __('Please sign in to continue.') }}</h5>
                                                 <form method="POST" action="{{ route('login') }}">
                                                     @csrf
 													<div class="form-group">
-														<label>Email</label> <input class="form-control" placeholder="Enter your email" type="email" name="email" value="{{old('email')}}" required autofocus autocomplete="username">
-                                                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
+														<x-core::form.fields.input-label-error type="email"  name="email" placeholder="Enter Email"  label="{{ __('Email') }}" value="{{old('email')}}" required autofocus autocomplete="username"/>
 													</div>
 													<div class="form-group">
-														<label>Password</label> <input class="form-control" placeholder="Enter your password" type="password" name="password" required autocomplete="current-password">
-                                                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
-													</div><button class="btn btn-main-primary btn-block">Sign In</button>
+														<x-core::form.fields.input-label-error type="password"  name="password" placeholder="Enter Password"  label="{{ __('Password') }}" value="{{old('password')}}" required autocomplete="current-password"/>
+													</div>
+													<button class="btn btn-main-primary btn-block">{{ __('Sign In') }}</button>
 													<div class="row row-xs">
 														<div class="col-sm-6">
-															<button class="btn btn-block"><i class="fab fa-facebook-f"></i> Signup with Facebook</button>
+															<button class="btn btn-block"><i class="fab fa-facebook-f"></i> {{ __('Signup with Facebook') }}</button>
 														</div>
 														<div class="col-sm-6 mg-t-10 mg-sm-t-0">
-															<button class="btn btn-info btn-block"><i class="fab fa-twitter"></i> Signup with Twitter</button>
+															<button class="btn btn-info btn-block"><i class="fab fa-twitter"></i> {{ __('Signup with Twitter') }}</button>
 														</div>
 													</div>
 												</form>
 												<div class="main-signin-footer mt-5">
-													<p><a href="">Forgot password?</a></p>
-													<p>Don't have an account? <a href="{{ route('register') }}">Create an Account</a></p>
+													<p><a href="">{{ __('Forgot password') }}?</a></p>
+													<p>{{ __("Don't have an account?") }} <a href="{{ route('register') }}">{{ __('Create an Account') }}</a></p>
 												</div>
 											</div>
 										</div>

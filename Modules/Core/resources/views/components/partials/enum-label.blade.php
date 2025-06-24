@@ -1,6 +1,7 @@
-<div>
-    <!-- 
-  <options=bold>“ If you do not have a consistent goal in life, you can not live it in a consistent way. ”</>
-  <fg=gray>— Marcus Aurelius</>
- -->
-</div>
+@if ($enum)
+    <span class="badge badge-{{ $enum->color() ?? 'primary' }}">
+        {{ $enum->label() ?? $enum->value }}
+    </span>
+@else
+    <span class="text-muted">-</span>
+@endif

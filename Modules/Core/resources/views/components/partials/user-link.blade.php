@@ -1,6 +1,7 @@
-<div>
-    <!-- 
-  <options=bold>“ The best way to take care of the future is to take care of the present moment. ”</>
-  <fg=gray>— Thich Nhat Hanh</>
- -->
-</div>
+@if ($user)
+    <a href="{{ route('users.show', $user->id) }}" class="text-primary fw-bold">
+        {{ $user->name }}
+    </a>
+@else
+    <span class="text-muted">{{ __('Unknown') }}</span>
+@endif

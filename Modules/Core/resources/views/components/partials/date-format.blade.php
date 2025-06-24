@@ -1,6 +1,5 @@
-<div>
-    <!-- 
-  <options=bold>“ Very little is needed to make a happy life. ”</>
-  <fg=gray>— Marcus Aurelius</>
- -->
-</div>
+@if ($date)
+    <span class="text-muted">{{ \Carbon\Carbon::parse($date)->format('Y-m-d H:i') }}</span>
+@else
+    <span class="text-muted">-</span>
+@endif

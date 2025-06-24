@@ -1,6 +1,10 @@
-<div>
-    <!-- 
-  <options=bold>“ Act only according to that maxim whereby you can, at the same time, will that it should become a universal law. ”</>
-  <fg=gray>— Immanuel Kant</>
- -->
-</div>
+@props(['value' => null])
+
+@php
+    $value = $value ?? 'Close';
+@endphp
+
+<button class="btn ripple btn-secondary" data-dismiss="modal" type="button" wire:click="close()">{{ __($value) }}</button>
+{{-- example --}}
+{{-- <x-core::form.fields.button-close value="Close" /> --}}
+{{-- <x-core::form.fields.button-close /> --}}

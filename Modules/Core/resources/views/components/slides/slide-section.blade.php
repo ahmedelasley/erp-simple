@@ -5,7 +5,7 @@
 @endphp
 
 <!-- slide -->
-<li class="side-item side-item-category">{{ $value }}</li>
+<li class="side-item side-item-category">{{ __($value) }}</li>
 <!-- /slide -->
 
 {{-- example --}}

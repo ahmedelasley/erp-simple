@@ -1,6 +1,11 @@
-<div>
-    <!-- 
-  <options=bold>“ Smile, breathe, and go slowly. ”</>
-  <fg=gray>— Thich Nhat Hanh</>
- -->
-</div>
+@php
+    $colors = [
+        'active' => 'success',
+        'inactive' => 'warning',
+        'archived' => 'secondary',
+    ];
+@endphp
+
+<span class="badge bg-{{ $colors[$status] ?? 'secondary' }}">
+    {{ ucfirst($status) }}
+</span>

@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\Core\View\Components;
+namespace Modules\Core\View\Components\Tables\Partials;
 
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
-class GetData extends Component
+class TableHeader extends Component
 {
     /**
      * Create a new component instance.
@@ -17,6 +17,6 @@ class GetData extends Component
      */
     public function render(): View|string
     {
-        return view('core::components.get-data');
+        return view('core::components.tables.partials.table-header');
     }
 }

@@ -1,4 +1,11 @@
-@props(['value' => null, 'route' => null, 'img' => null, 'icon' => null, 'badgeValue' => null, 'badgeColor' => null])
+@props([
+    'value' => null,
+    'route' => null,
+    'img' => null,
+    'icon' => null,
+    'badgeValue' => null,
+    'badgeColor' => null
+  ])
 
 @php
     $route = $route ?? 'javascript:void(0);';
@@ -21,7 +28,7 @@
         @endif
 
         <span class="side-menu__label">
-          {{ $value }}
+          {{ __($value) }}
         </span>
 
         @if ($badgeValue)

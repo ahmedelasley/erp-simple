@@ -22,8 +22,8 @@
           <i class="side-menu__icon {{ $icon  }}" viewBox="0 0 24 24"></i>
         @endif
 
-        <span class="side-menu__label"> {{ $value }}</span>
-        
+        <span class="side-menu__label"> {{ __($value) }}</span>
+
         <i class="angle fe fe-chevron-down"></i>
         @if ($badgeValue)
           <span class="badge badge-{{ $badgeColor }} side-badge">{{ $badgeValue }}</span>
@@ -34,3 +34,9 @@
     </ul>
 </li>
 <!-- /slide -->
+
+
+{{-- example --}}
+{{-- <x-core::slides.slide-menu :value="__('Products Management')">
+    <x-core::slides.slide-item :value="__('Products')" :route="route('dashboard.index')" :badgeValue="1" />
+</x-core::slides.slide-menu> --}}

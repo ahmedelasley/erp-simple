@@ -9,9 +9,15 @@
 
 <!-- slide -->
 <li>
-    <a class="slide-item" href="{{ $route }}">{{ $value }}</a>
+    <a class="slide-item" href="{{ $route }}">{{ __($value) }}</a>
     @if ($badgeValue)
       <span class="badge badge-{{ $badgeColor }} side-badge">{{ $badgeValue }}</span>
     @endif
 </li>
 <!-- /slide -->
+
+
+{{-- example --}}
+{{-- <x-core::slides.slide-item :value="__('Products')" :route="route('dashboard.index')" :badgeValue="1" /> --}}
+{{-- <x-core::slides.slide-item :value="__('Products')" :route="route('dashboard.index')" /> --}}
+{{-- <x-core::slides.slide-item :value="__('Products')" /> --}}
