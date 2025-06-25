@@ -2,21 +2,50 @@
 
 namespace Modules\Core\Livewire;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-// use Modules\Core\Database\Factories\../Livewire/BaseComponentFactory;
+use Livewire\Component;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
-class BaseComponent extends Model
+class BaseComponent extends Component
 {
-    use HasFactory;
+    // use LivewireAlert;
 
     /**
-     * The attributes that are mass assignable.
+     * Common success alert.
      */
-    protected $fillable = [];
+    protected function successAlert(string $message): void
+    {
+        $this->alert('success', $message ?? __('Operation completed successfully.'));
+    }
 
-    // protected static function newFactory(): ../Livewire/BaseComponentFactory
-    // {
-    //     // return ../Livewire/BaseComponentFactory::new();
-    // }
+    /**
+     * Common error alert.
+     */
+    protected function errorAlert(string $message): void
+    {
+        $this->alert('error', $message ?? __('Something went wrong.'));
+    }
+
+    /**
+     * Common warning alert.
+     */
+    protected function warningAlert(string $message): void
+    {
+        $this->alert('warning', $message ?? __('Please check your inputs.'));
+    }
+
+    /**
+     * Dispatch modal open.
+     */
+    protected function openModal(string $event): void
+    {
+        $this->dispatch($event);
+    }
+
+    /**
+     * Dispatch modal close.
+     */
+    protected function closeModal(string $event): void
+    {
+        $this->dispatch($event);
+    }
 }

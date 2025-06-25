@@ -4,19 +4,18 @@ namespace Modules\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-// use Modules\Core\Database\Factories\BaseModelFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Core\Traits\HasCreatorEditorDeletor;
 
 class BaseModel extends Model
 {
-    use HasFactory;
+    use HasFactory, HasCreatorEditorDeletor, SoftDeletes;
 
-    /**
-     * The attributes that are mass assignable.
-     */
-    protected $fillable = [];
+    protected $guarded = [];
 
-    // protected static function newFactory(): BaseModelFactory
-    // {
-    //     // return BaseModelFactory::new();
-    // }
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:i',
+        'updated_at' => 'datetime:Y-m-d H:i',
+        'deleted_at' => 'datetime:Y-m-d H:i',
+    ];
 }
