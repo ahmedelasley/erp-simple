@@ -89,13 +89,13 @@
 						@endforeach 
 					</x-core::tables.get-data>
 
-					<x-core::tables.dynamic-table
+<x-core::tables.dynamic-table
     :columns="[
-        ['label' => 'ID', 'field' => 'id'],
-        ['label' => 'Name', 'field' => 'name'],
-        ['label' => 'Status', 'field' => 'status', 'type' => 'badge'],
-        ['label' => 'Email', 'field' => 'email'],
-        ['label' => 'Created At', 'field' => 'created_at', 'type' => 'date'],
+        ['label' => 'ID', 'field' => 'id', 'clickBtn' => 'sortBy' ,'sortField' => 'id', 'sortDirection' => 'asc'],
+        ['label' => 'Name', 'field' => 'name', 'clickBtn' => 'sortBy' ,'sortField' => 'id', 'sortDirection' => 'asc'],
+        ['label' => 'Status', 'field' => 'status', 'clickBtn' => 'sortBy' ,'sortField' => 'id', 'sortDirection' => 'asc', 'type' => 'badge'],
+        ['label' => 'Email', 'field' => 'email', 'clickBtn' => 'sortBy' ,'sortField' => 'id', 'sortDirection' => 'asc'],
+        ['label' => 'Created At', 'field' => 'created_at', 'clickBtn' => '' ,'sortField' => 'id', 'sortDirection' => 'asc', 'type' => 'date'],
     ]"
     :rows="$users"
     :actions="[
@@ -103,6 +103,7 @@
         ['label' => __('Edit'), 'event' => 'edit_user', 'icon' => 'bx bx-edit'],
         ['divider' => true],
         ['label' => __('Delete'), 'event' => 'delete_user', 'icon' => 'bx bx-trash', 'class' => 'text-danger', 'confirm' => true],
+		
     ]"
 />
 
