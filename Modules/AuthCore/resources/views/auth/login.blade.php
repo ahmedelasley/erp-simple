@@ -42,7 +42,7 @@
 													</div>
 												</form>
 												<div class="main-signin-footer mt-5">
-													<p><a href="">{{ __('Forgot password') }}?</a></p>
+													<p><a href="{{ route('password.email') }}">{{ __('Forgot password') }}?</a></p>
 													<p>{{ __("Don't have an account?") }} <a href="{{ route('register') }}">{{ __('Create an Account') }}</a></p>
 												</div>
 											</div>
