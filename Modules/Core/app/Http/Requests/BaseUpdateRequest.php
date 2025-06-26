@@ -1,24 +1,33 @@
 <?php
 
 namespace Modules\Core\Http\Requests;
+use Modules\Core\Http\Requests\BaseRequest;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class BaseUpdateRequest extends FormRequest
+abstract class BaseUpdateRequest extends BaseRequest
 {
     /**
-     * Get the validation rules that apply to the request.
+     * The ID of the model being updated.
+     *
+     * @var mixed
      */
-    public function rules(): array
+    protected mixed $modelId;
+
+    /**
+     * BaseUpdateRequest constructor.
+     *
+     * @param mixed $modelId
+     */
+    public function __construct($modelId = null)
     {
-        return [];
+        parent::__construct();
+        $this->modelId = $modelId;
     }
 
     /**
-     * Determine if the user is authorized to make this request.
+     * Common rules for updating data.
+     * 
+     * @return array
      */
-    public function authorize(): bool
-    {
-        return true;
-    }
+
+    abstract public function rules(): array;
 }
