@@ -7,7 +7,8 @@ use Illuminate\Support\ServiceProvider;
 use Nwidart\Modules\Traits\PathNamespace;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
-
+use Livewire\Livewire;
+use Modules\Core\Livewire\DemoAlert;
 class CoreServiceProvider extends ServiceProvider
 {
     use PathNamespace;
@@ -30,6 +31,8 @@ class CoreServiceProvider extends ServiceProvider
         // Blade::componentNamespace('Modules\\Core\\System\\View\\Components', 'core.system');
 
         // Blade::componentNamespace('Modules\\Core\\View\\Components', 'core');
+
+    Livewire::component('demo-alert', DemoAlert::class);
 
     }
 

@@ -12,8 +12,6 @@
     <!--end::Primary Meta Tags-->
 
     @include('core::layouts.partials.head-styles')
-
     @livewireStyles
-
   </head>
   <!--end::Head-->

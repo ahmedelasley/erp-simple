@@ -34,24 +34,20 @@
 <script src="{{URL::asset('assets/back/js/custom.js')}}"></script><!-- Left-menu js-->
 <script src="{{URL::asset('assets/back/plugins/side-menu/sidemenu.js')}}"></script>
 
-<!-- Internal Livewire Scripts -->
-@livewireScripts
-
 <!-- end::Footer scripts -->
 
 <!-- SweetAlert2 Script -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
 
 
 <script>
     let isRedirecting = false; // Flag to prevent multiple redirects
-    
+
     Livewire.hook('request', ({ fail }) => {
         fail(({ status, preventDefault }) => {
             if (status === 419) {
                 preventDefault(); // Stop Livewire's default behavior
-                
+
                 if (!isRedirecting) {
                     isRedirecting = true; // Set the flag to true
                     window.location.href = '/login'; // Redirect to login route

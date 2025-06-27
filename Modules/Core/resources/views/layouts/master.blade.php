@@ -53,6 +53,9 @@
         @include('core::layouts.partials.footer-scripts')
         <!--end::Page Scripts-->
 
+        @livewireScripts
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        @livewireAlertScripts
     </body>
     <!--end::Body-->
 </html>

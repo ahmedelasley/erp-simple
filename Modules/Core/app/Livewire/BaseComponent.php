@@ -3,35 +3,47 @@
 namespace Modules\Core\Livewire;
 
 use Livewire\Component;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 
 class BaseComponent extends Component
 {
-    // use LivewireAlert;
 
     /**
      * Common success alert.
      */
-    protected function successAlert(string $message): void
+    protected function successAlert($message = __('Operation completed successfully.'))
     {
-        $this->alert('success', $message ?? __('Operation completed successfully.'));
+        LivewireAlert::title('success')
+            ->text($message)
+            ->success()
+            ->show();
     }
 
     /**
      * Common error alert.
      */
-    protected function errorAlert(string $message): void
+    protected function errorAlert($message =  __('Something went wrong, try .'))
     {
-        $this->alert('error', $message ?? __('Something went wrong.'));
+        LivewireAlert::title(' error')
+            ->text($message)
+            -> error()
+            ->show();
+    }
+    /**
+     * Common confirmation alert.
+     */
+    protected function confirmDelete($callbackMethod, $message = __('Something went wrong, try .'))
+    {
+        LivewireAlert::confirm([
+            'title' => 'تأكيد الحذف',
+            'text' => $message,
+            'icon' => 'warning',
+            'confirmButtonText' => 'نعم، احذف',
+            'cancelButtonText' => 'إلغاء',
+            'onConfirmed' => $callbackMethod,
+        ]);
     }
 
-    /**
-     * Common warning alert.
-     */
-    protected function warningAlert(string $message): void
-    {
-        $this->alert('warning', $message ?? __('Please check your inputs.'));
-    }
 
     /**
      * Dispatch modal open.
