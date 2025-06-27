@@ -22,7 +22,9 @@
                 @endmodule
         </div>
         <ul class="side-menu">
-
+            @module('Dashboard')
+                @include('dashboard::layouts.partials.slide')
+            @endmodule
 
         </ul>
     </div>
