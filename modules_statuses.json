@@ -1,5 +1,6 @@
 {
     "Core": true,
     "AuthCore": true,
-    "Dashboard": true
+    "Dashboard": true,
+    "Departments": true
 }
