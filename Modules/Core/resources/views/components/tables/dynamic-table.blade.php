@@ -16,18 +16,19 @@
         {{-- <thead> --}}
             <tr class="bg-dark fs-14 text-bold text-white text-center">
                     @foreach ($columns as $column)
-                        @php
-                            $sortField = $column['sortField'] ?? null;
-                            $sortDirection = $column['sortDirection'] ?? 'asc';
-                        @endphp
                         <th>
-                            @if($sortField && $sortDirection)
-                                <a class="d-flex justify-content-between link-no-color" type="button" href="javascript:void(0);" wire:click.prevent="{{ $sortField }}('{{ $sortDirection }}')">
+                            @if(isset($column['clickBtn']) & isset($column['sortField']))
+                                @php
+                                    $clickBtn = $column['clickBtn']?? 'sortBy';
+                                    $sortField = $column['sortField'] ?? 'created_at';
+                                    $sortDirection = $column['sortDirection'] ?? 'asc';
+                                @endphp
+                                <a class="d-flex justify-content-between link-no-color" type="button" href="javascript:void(0);" wire:click.prevent="{{ $clickBtn }}('{{ $sortField }}')">
                                     <span>{{ __($column['label']) }}</span>
                                     <i class="bx bx-chevron-{{ $sortDirection === 'asc' ? 'up' : 'down' }}"></i>
                                 </a>
                             @else
-                                <th>{{ __($column['label']) }}</th>
+                                {{ __($column['label']) }}
                             @endif
                         </th>
 
@@ -36,7 +37,8 @@
             </tr>
         {{-- </thead> --}}
         <tbody>
-            @forelse ($rows as $row)
+            {{ $slot }}
+            {{-- @forelse ($rows as $row)
                 <tr>
                     @foreach ($columns as $column)
                         @php
@@ -73,7 +75,7 @@
                 <tr>
                     <td colspan="{{ count($columns) + 1 }}" class="text-center text-muted">{{ __('No data found.') }}</td>
                 </tr>
-            @endforelse
+            @endforelse --}}
         </tbody>
     </table>
 </div>
