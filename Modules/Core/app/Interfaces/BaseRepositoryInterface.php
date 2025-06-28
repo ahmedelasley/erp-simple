@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Builder;
 
 interface BaseRepositoryInterface
 {
-    public function all(array $filters = []): iterable;
-    public function allWithTrashed(array $filters = []): iterable;
+    public function all(array $filters = []): Builder;
+    public function allWithTrashed(array $filters = []): Builder;
     public function paginate(array $filters = [], int $perPage = 15);
     public function find($id);
     public function create(array $data);

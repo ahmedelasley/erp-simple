@@ -16,18 +16,18 @@ abstract class BaseRepository implements BaseRepositoryInterface
         $this->model = $model;
     }
 
-    public function all(array $filters = []): iterable
+    public function all(array $filters = []): Builder
     {
-        return $this->applyFilters($this->model->newQuery(), $filters)->get();
+        return $this->applyFilters($this->model->newQuery(), $filters);
     }
 
-    public function allWithTrashed(array $filters = []): iterable
+    public function allWithTrashed(array $filters = []): Builder
     {
         if (!$this->supportsSoftDeletes()) {
             return $this->all($filters);
         }
 
-        return $this->applyFilters($this->model->withTrashed(), $filters)->get();
+        return $this->applyFilters($this->model->withTrashed(), $filters);
     }
 
     public function paginate(array $filters = [], int $perPage = 15)

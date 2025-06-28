@@ -3,47 +3,14 @@
 namespace Modules\Core\Livewire;
 
 use Livewire\Component;
-use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
+use Modules\Core\Traits\HasAdvancedAlerts;
 
-class BaseComponent extends Component
+class BaseComponent extends Component 
 {
+    use HasAdvancedAlerts;
 
-    /**
-     * Common success alert.
-     */
-    protected function successAlert($message = __('Operation completed successfully.'))
-    {
-        LivewireAlert::title('success')
-            ->text($message)
-            ->success()
-            ->show();
-    }
 
-    /**
-     * Common error alert.
-     */
-    protected function errorAlert($message =  __('Something went wrong, try .'))
-    {
-        LivewireAlert::title(' error')
-            ->text($message)
-            -> error()
-            ->show();
-    }
-    /**
-     * Common confirmation alert.
-     */
-    protected function confirmDelete($callbackMethod, $message = __('Something went wrong, try .'))
-    {
-        LivewireAlert::confirm([
-            'title' => 'تأكيد الحذف',
-            'text' => $message,
-            'icon' => 'warning',
-            'confirmButtonText' => 'نعم، احذف',
-            'cancelButtonText' => 'إلغاء',
-            'onConfirmed' => $callbackMethod,
-        ]);
-    }
-
+    
 
     /**
      * Dispatch modal open.

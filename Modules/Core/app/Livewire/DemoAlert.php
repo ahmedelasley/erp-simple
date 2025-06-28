@@ -20,6 +20,31 @@ class DemoAlert extends Component
 
     }
 
+
+        /**
+     * Common success alert.
+     */
+    protected function successAlert()
+    {
+        $this->showCustomAlert('Success', __('Operation completed successfully.'), 'success',
+            [
+                // 'toast' => true,
+            ]
+        );
+    }
+
+    /**
+     * Common error alert.
+     */
+    protected function errorAlert()
+    {
+        $this->showCustomAlert('Success', __('Something went wrong, try .'), 'success',
+            [
+                // 'toast' => true,
+            ]
+        );
+    }
+
     public function render()
     {
         return view('core::livewire.demo-alert');

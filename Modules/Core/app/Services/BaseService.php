@@ -13,7 +13,7 @@ abstract class BaseService
         $this->repository = $repository;
     }
 
-    public function all(array $filters = []): iterable
+    public function all(array $filters = []): Builder
     {
         return $this->repository->all($filters);
     }
