@@ -3,6 +3,13 @@
     'rows' => [],
     'actions' => [],
 ])
+
+<style>
+  .link-no-color {
+    color: inherit;
+    text-decoration: none;
+  }
+</style>
 <div class="table-responsive hoverable-table">
     
     <table class="table table-striped table-bordered table-hover text-md-wrap text-center">
