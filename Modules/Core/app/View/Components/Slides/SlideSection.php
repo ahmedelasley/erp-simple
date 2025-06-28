@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Core\View\Components\SlideMenu;
+namespace Modules\Core\View\Components\Slides;
 
 use Illuminate\View\Component;
 use Illuminate\View\View;
