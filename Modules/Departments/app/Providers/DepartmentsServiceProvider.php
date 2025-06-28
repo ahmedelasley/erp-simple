@@ -11,6 +11,7 @@ use Modules\Departments\Services\DepartmentService;
 use Modules\Departments\Repositories\DepartmentRepository;
 use Modules\Departments\Interfaces\DepartmentServiceInterface;
 use Modules\Departments\Interfaces\DepartmentRepositoryInterface;
+use Livewire\Livewire;
 
 class DepartmentsServiceProvider extends ServiceProvider
 {
@@ -31,6 +32,9 @@ class DepartmentsServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->name, 'database/migrations'));
+        Livewire::component('departments.get-data', \Modules\Departments\Livewire\Departments\GetData::class);
+        Livewire::component('departments.create', \Modules\Departments\Livewire\Departments\Partials\Create::class);
+
     }
 
     /**

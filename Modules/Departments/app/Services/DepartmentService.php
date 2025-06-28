@@ -4,6 +4,7 @@ namespace Modules\Departments\Services;
 
 use Modules\Departments\Interfaces\DepartmentServiceInterface;
 use Modules\Departments\Interfaces\DepartmentRepositoryInterface;
+use Illuminate\Database\Eloquent\Builder;
 
 class DepartmentService implements DepartmentServiceInterface
 {
@@ -14,7 +15,7 @@ class DepartmentService implements DepartmentServiceInterface
         $this->repository = $repository;
     }
 
-    public function all(array $filters = []): iterable
+    public function all(array $filters = []): Builder
     {
         return $this->repository->all($filters);
     }

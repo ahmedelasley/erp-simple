@@ -3,8 +3,6 @@
 namespace Modules\Departments\Models;
 
 use Modules\Core\Models\BaseModel;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Department extends BaseModel
 {
@@ -14,7 +12,7 @@ class Department extends BaseModel
 
     public function parent()
     {
-        return $this->belongsTo(self::class, 'parent_id');
+        return $this->belongsTo(self::class, 'parent_id')->withDefault(['name' => __('No Parent')]);
     }
 
     public function children()

@@ -8,5 +8,9 @@ use Modules\Core\Repositories\BaseRepository;
 
 class DepartmentRepository extends BaseRepository implements DepartmentRepositoryInterface
 {
-    protected $model = Department::class;
+    // protected $model = Department::class;
+    public function __construct()
+    {
+        parent::__construct(new Department());
+    }
 }

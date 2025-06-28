@@ -1,11 +1,12 @@
 <?php
 
 namespace Modules\Departments\Interfaces;
+use Illuminate\Database\Eloquent\Builder;
 
 
 interface DepartmentServiceInterface
 {
-    public function all(array $filters = []): iterable;
+    public function all(array $filters = []): Builder;
 
     public function create(array $data);
     public function update($model, array $data);
