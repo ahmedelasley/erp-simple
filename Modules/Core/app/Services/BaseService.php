@@ -2,6 +2,7 @@
 
 namespace Modules\Core\Services;
 
+use Illuminate\Database\Eloquent\Builder;
 use Modules\Core\Interfaces\BaseRepositoryInterface;
 
 abstract class BaseService
@@ -38,7 +39,7 @@ abstract class BaseService
         $this->repository->delete($model);
     }
 
-    public function allWithTrashed(array $filters = []): iterable
+    public function allWithTrashed(array $filters = []): Builder
     {
         return $this->repository->allWithTrashed($filters);
     }
