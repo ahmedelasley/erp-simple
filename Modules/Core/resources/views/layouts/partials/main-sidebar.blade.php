@@ -25,7 +25,9 @@
             @module('Dashboard')
                 @include('dashboard::layouts.partials.slide')
             @endmodule
-
+            @module('Departments')
+                @include('departments::layouts.partials.slide')
+            @endmodule
         </ul>
     </div>
 </aside>

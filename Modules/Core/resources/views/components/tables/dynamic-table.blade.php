@@ -19,7 +19,7 @@
                         <th>
                             @if(isset($column['clickBtn']) & isset($column['sortField']))
                                 @php
-                                    $clickBtn = $column['clickBtn']?? 'sortBy';
+                                    $clickBtn = $column['clickBtn'] ?? 'sortBy';
                                     $sortField = $column['sortField'] ?? 'created_at';
                                     $sortDirection = $column['sortDirection'] ?? 'asc';
                                 @endphp

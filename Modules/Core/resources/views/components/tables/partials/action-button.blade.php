@@ -1,34 +1,6 @@
 @props([
     'actions' => [], // مصفوفة ديناميكية للأزرار
 ])
-
-<style>
-.dropdown-menu {
-    max-height: 100px; /* الحد الأقصى للارتفاع */
-    overflow-y: auto; /* تمكين التمرير العمودي */
-}
-.dropdown-item {
-    white-space: nowrap; /* منع التفاف النص */
-}
-.dropdown-item:hover {
-    background-color: #f8f9fa; /* لون الخلفية عند التمرير */
-}
-.dropdown-divider {
-    margin: 0.5rem 0; /* مسافة بين العناصر */
-}
-.dropdown-item b {
-    font-weight: bold; /* جعل النص داخل العنصر بارز */
-}
-.dropdown-item i {
-    margin-right: 0.5rem; /* مسافة بين الأيقونة والنص */
-}
-.dropdown-toggle::after {
-    display: none !important;/* إخفاء السهم المنسدل */
-}
-
-
-</style>
-
 <td class="text-center align-middle" style="width: 100px; min-width: 100px; max-width: 100px;">
 {{-- make dropdown list can scroll --}}
 <div class="dropdown">
