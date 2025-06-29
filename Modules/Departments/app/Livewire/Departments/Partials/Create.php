@@ -4,7 +4,7 @@ namespace Modules\Departments\Livewire\Departments\Partials;
 
 use Modules\Core\Livewire\BaseComponent;
 use Modules\Departments\Livewire\Departments\GetData;
-use Modules\Core\Http\Requests\DepartmentStoreRequest;
+use Modules\Departments\Http\Requests\DepartmentStoreRequest;
 use Modules\Departments\Interfaces\DepartmentServiceInterface;
 
 class Create extends BaseComponent
@@ -43,17 +43,14 @@ class Create extends BaseComponent
         $this->reset();
 
         // Close the modal on the frontend
-        $this->dispatch('create-category-modal');
+        $this->closeModal('create-department-modal');
 
         // Refresh the category table
         $this->dispatch('refreshData')->to(GetData::class);
 
         // Show success alert
         $this->successAlert();
-        // LivewireAlert::title(__('Success'))
-        //     ->text(__('Category added successfully.'))
-        //     ->success()
-        //     ->show();
+
     }
 
 
@@ -73,7 +70,7 @@ class Create extends BaseComponent
 
         $filters = [];
 
-        $data = $service->All($filters);
+        $data = $service->All($filters)->get();
 
         return view('departments::livewire.departments.partials.create', [
             'data' => $data,

@@ -4,21 +4,15 @@ namespace Modules\Departments\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Modules\Departments\Models\Department;
+use Illuminate\Support\Str;
 
 class DepartmentsDatabaseSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-
-        // لنفترض أن المستخدم الإداري الأول هو الذي أنشأ الأقسام
         $creator_type = 'Modules\AuthCore\Models\User';
         $creator_id = 1;
 
-
-        // الأقسام الرئيسية
         $departments = [
             'الإدارة العامة',
             'الموارد البشرية',
@@ -35,20 +29,21 @@ class DepartmentsDatabaseSeeder extends Seeder
 
         $departmentIds = [];
 
-        // إنشاء الأقسام الرئيسية
+        // $counter = 1;
+
         foreach ($departments as $name) {
             $department = Department::create([
                 'name' => $name,
+                // 'slug' => Str::slug($name),
+                // 'code' => 'DEP-' . $counter++,
                 'description' => $this->getDescription($name),
                 'parent_id' => null,
                 'creator_type' => $creator_type,
                 'creator_id' => $creator_id
-
             ]);
             $departmentIds[$name] = $department->id;
         }
 
-        // الأقسام الفرعية
         $subDepartments = [
             'الموارد البشرية' => ['التوظيف', 'التدريب', 'العلاقات العمالية'],
             'الشؤون المالية' => ['المحاسبة', 'التدقيق', 'المرتبات'],
@@ -65,6 +60,8 @@ class DepartmentsDatabaseSeeder extends Seeder
             foreach ($subs as $sub) {
                 Department::create([
                     'name' => $sub,
+                    // 'slug' => Str::slug($sub),
+                    // 'code' => 'DEP-' . $counter++,
                     'description' => null,
                     'parent_id' => $departmentIds[$parent],
                     'creator_type' => $creator_type,
@@ -91,5 +88,4 @@ class DepartmentsDatabaseSeeder extends Seeder
             default => null
         };
     }
-
 }

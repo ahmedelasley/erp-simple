@@ -28,5 +28,21 @@
 		<!-- main-content closed -->
 @endsection
 @section('js')
-
+    <script>
+        window.addEventListener('create-department-modal', event => {
+            $('#createModal').modal('toggle');
+        })
+        // window.addEventListener('show-department-modal', event => {
+        //     $('#showModal').modal('toggle');
+        // })
+        // window.addEventListener('edit-department-modal', event => {
+        //     $('#editModal').modal('toggle');
+        // })
+        // window.addEventListener('toggle-status-department-modal', event => {
+        //     $('#statusModal').modal('toggle');
+        // })
+        // window.addEventListener('delete-department-modal', event => {
+        //     $('#deleteModal').modal('toggle');
+        // })
+    </script>
 @endsection

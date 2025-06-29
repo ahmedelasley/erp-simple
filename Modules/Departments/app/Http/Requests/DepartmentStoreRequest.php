@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Core\Http\Requests;
+namespace Modules\Departments\Http\Requests;
 use Modules\Core\Http\Requests\BaseStoreRequest;
 
 class DepartmentStoreRequest extends BaseStoreRequest
