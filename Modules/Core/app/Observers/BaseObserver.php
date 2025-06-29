@@ -2,37 +2,51 @@
 
 namespace Modules\Core\Observers;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Schema;
 
 abstract class BaseObserver
 {
-    public function creating(Model $model)
+    final public function creating($model)
     {
         if (Auth::check()) {
             $model->creator_id = Auth::id();
             $model->creator_type = get_class(Auth::user());
         }
+
+        $this->onCreating($model);
     }
 
-    public function updating(Model $model)
+    final public function updating($model)
     {
         if (Auth::check()) {
             $model->editor_id = Auth::id();
             $model->editor_type = get_class(Auth::user());
         }
+
+        $this->onUpdating($model);
     }
 
-    public function deleting(Model $model)
+    final public function deleting($model)
     {
-        if (Auth::check() && $model->hasColumn('deletor_id')) {
+        if (Auth::check() && $this->hasColumn($model, 'deletor_id')) {
             $model->deletor_id = Auth::id();
             $model->deletor_type = get_class(Auth::user());
-            $model->saveQuietly(); // Save without triggering observers or events to avoid recursion issues 
+            $model->saveQuietly();
         }
+
+        $this->onDeleting($model);
+    }
+
+    /**
+     * Hook methods to be optionally implemented by child observers.
+     */
+    protected function onCreating($model) {}
+    protected function onUpdating($model) {}
+    protected function onDeleting($model) {}
+
+    protected function hasColumn($model, string $column): bool
+    {
+        return in_array($column, $model->getFillable()) || Schema::hasColumn($model->getTable(), $column);
     }
 }
-
-// This observer automatically sets the creator, editor, and deletor IDs and types
-// based on the authenticated user when creating, updating, or deleting a model.
-// It assumes that the model has the necessary columns (creator_id, creator_type, editor_id, 

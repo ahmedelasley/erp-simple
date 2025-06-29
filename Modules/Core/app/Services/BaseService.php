@@ -1,5 +1,4 @@
 <?php
-
 namespace Modules\Core\Services;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -12,6 +11,11 @@ abstract class BaseService
     public function __construct(BaseRepositoryInterface $repository)
     {
         $this->repository = $repository;
+    }
+
+    public function query(): Builder
+    {
+        return $this->repository->query();
     }
 
     public function all(array $filters = []): Builder

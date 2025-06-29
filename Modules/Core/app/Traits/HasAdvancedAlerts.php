@@ -32,13 +32,9 @@ trait HasAdvancedAlerts
     /**
      * Common success alert.
      */
-    protected function successAlert()
+    protected function successAlert($title = "Success", $message = 'Operation completed successfully.', $type = 'success',  array $options = [])
     {
-        $this->showCustomAlert('Success', __('Operation completed successfully.'), 'success',
-            [
-                // 'toast' => true,
-            ]
-        );
+        $this->showCustomAlert($title , __($message), $type, $options);
     }
 
     /**

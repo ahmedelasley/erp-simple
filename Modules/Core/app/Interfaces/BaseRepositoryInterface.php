@@ -1,11 +1,13 @@
 <?php
 
 namespace Modules\Core\Interfaces;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
 interface BaseRepositoryInterface
 {
+    public function query(): Builder;
     public function all(array $filters = []): Builder;
     public function allWithTrashed(array $filters = []): Builder;
     public function paginate(array $filters = [], int $perPage = 15);

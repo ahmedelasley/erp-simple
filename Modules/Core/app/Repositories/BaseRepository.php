@@ -16,9 +16,14 @@ abstract class BaseRepository implements BaseRepositoryInterface
         $this->model = $model;
     }
 
+    public function query(): Builder
+    {
+        return $this->model->newQuery();
+    }
+
     public function all(array $filters = []): Builder
     {
-        return $this->applyFilters($this->model->newQuery(), $filters);
+        return $this->applyFilters($this->query(), $filters);
     }
 
     public function allWithTrashed(array $filters = []): Builder
@@ -32,7 +37,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
 
     public function paginate(array $filters = [], int $perPage = 15)
     {
-        return $this->applyFilters($this->model->newQuery(), $filters)->paginate($perPage);
+        return $this->applyFilters($this->query(), $filters)->paginate($perPage);
     }
 
     public function find($id)
@@ -79,20 +84,14 @@ abstract class BaseRepository implements BaseRepositoryInterface
         $model->forceDelete();
     }
 
-    /**
-     * Check if model uses SoftDeletes trait.
-     */
     protected function supportsSoftDeletes(): bool
     {
         return in_array(SoftDeletes::class, class_uses_recursive($this->model));
     }
 
-    /**
-     * Optional: Apply filters to the query.
-     */
     protected function applyFilters(Builder $query, array $filters): Builder
     {
-        // يمكنك توسيع هذه الدالة لاحقًا لتطبيق الفلاتر.
+        // فلاتر افتراضية يمكن توسعتها حسب الحاجة
         return $query;
     }
 }
