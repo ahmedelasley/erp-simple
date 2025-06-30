@@ -15,7 +15,7 @@ class GetData extends Component
     public string $search = '';
     public string $searchField = 'name';
     public string $sortField = 'id';
-    public string $sortDirection = 'asc';
+    public string $sortDirection = 'desc';
     public int $paginate = 10;
     public int $page = 1;
 

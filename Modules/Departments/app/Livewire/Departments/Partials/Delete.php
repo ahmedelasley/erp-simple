@@ -18,16 +18,15 @@ class Delete extends BaseComponent
 
     protected $listeners = ['delete_department'];
 
-    public function delete_department($id)
+    public function delete_department($id, DepartmentServiceInterface $service)
     {
-        $this->model = Department::findOrFail($id);
+        $this->model = $service->find($id);
 
         // dd($this->model);
         if (!$this->model) {
             // Show error alert
             $this->errorAlert();
             return;
-
         }
 
         // Set the properties
@@ -48,14 +47,13 @@ class Delete extends BaseComponent
     {
         $service->delete($this->model);
 
-
-        // $this->reset();
+        $this->close();
 
         // Close the modal on the frontend
-        $this->closeModal('delete-department-modal');
+        // $this->closeModal('delete-department-modal');
 
         // Refresh the department table
-        $this->dispatch('refreshData')->to(GetData::class);
+        // $this->dispatch('refreshData')->to(GetData::class);
 
         // Show success alert
         $this->successAlert();
@@ -68,10 +66,15 @@ class Delete extends BaseComponent
      */
     public function close(): void
     {
+        // Reset Data, Validation, ErrorBag
         $this->reset();
         $this->resetValidation();
         $this->resetErrorBag();
-        $this->dispatch('refreshData');
+
+        // Refresh the department table
+        $this->dispatch('refreshData')->to(GetData::class);
+        // Close the modal on the frontend
+        $this->closeModal('delete-department-modal');
     }
 
     public function render(DepartmentServiceInterface $service)

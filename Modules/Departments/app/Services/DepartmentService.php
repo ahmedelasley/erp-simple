@@ -22,7 +22,7 @@ class DepartmentService implements DepartmentServiceInterface
 
     public function find($id)
     {
-        return $this->repository->create($id);
+        return $this->repository->find($id);
     }
 
     public function create(array $data)

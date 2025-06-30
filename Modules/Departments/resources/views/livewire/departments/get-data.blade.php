@@ -23,7 +23,7 @@
                         ['label' => __('Export PDF to Mail'), 'event' => 'exportPDF'],
                         ['label' => __('Export Excel to Mail'), 'event' => 'exportExcel'],
                         ['label' => __('Export CSV to Mail'), 'event' => 'exportCSV'],
-                    ]" 
+                    ]"
                 />
 
                 <x-core::form.fields.button-import />
@@ -36,31 +36,33 @@
         <div class="card-body">
             @php
                 $columns=[
-                    ['label' => 'ID', 'clickBtn' => 'sortBy' ,'sortField' => 'id', 'sortDirection' => 'asc'],
-                    ['label' => 'Name', 'clickBtn' => 'sortBy' ,'sortField' => 'id', 'sortDirection' => 'asc'],
+                    ['label' => 'ID', 'clickBtn' => 'sortBy' ,'sortField' => 'id', 'sortDirection' => 'desc'],
+                    ['label' => 'Code', 'clickBtn' => 'sortBy' ,'sortField' => 'code', 'sortDirection' => 'desc'],
+                    ['label' => 'Name', 'clickBtn' => 'sortBy' ,'sortField' => 'id', 'sortDirection' => 'desc'],
                     ['label' => 'Description'],
-                    ['label' => 'Parent', 'clickBtn' => 'sortBy' ,'sortField' => 'parent_id', 'sortDirection' => 'asc'],
+                    ['label' => 'Parent', 'clickBtn' => 'sortBy' ,'sortField' => 'parent_id', 'sortDirection' => 'desc'],
                     ['label' => 'No Child'],
-                    ['label' => 'Created At', 'clickBtn' => '' ,'sortField' => 'created_at', 'sortDirection' => 'asc'],
+                    ['label' => 'Created At', 'clickBtn' => '' ,'sortField' => 'created_at', 'sortDirection' => 'desc'],
                 ];
             @endphp
             <x-core::tables.dynamic-table :columns="$columns">
             @forelse ($data as $value)
                 <tr>
                     <th><b>{{ $data->firstItem()+$loop->index }}</b></th>
+                    <td><b>{{ $value->code }}</b></td>
                     <td><b>{{ $value->name }}</b></td>
                     <td><b class="text-muted">{{ $value->description }}</b></td>
                     <td><b><x-core::partials.badge :label="$value->parent?->name" /></b></td>
                     <td><b>{{ $value->children_count }}</b></td>
                     <td><b><x-core::partials.date-format :date="$value->created_at" /></b></td>
 
-                    <x-core::tables.partials.action-button 
+                    <x-core::tables.partials.action-button
                         :actions="[
                             ['label' => __('Details'), 'event' => 'show_department', 'id' => $value->id, 'icon' => 'bx bx-info-circle'],
                             ['label' => __('Edit'), 'event' => 'edit_department', 'id' => $value->id, 'icon' => 'bx bx-edit'],
                             ['divider' => true],
                             ['label' => __('Delete'), 'event' => 'delete_department', 'id' => $value->id, 'icon' => 'bx bx-trash', 'class' => 'text-danger', 'confirm' => true],
-                        ]" 
+                        ]"
                     />
 
                 </tr>
