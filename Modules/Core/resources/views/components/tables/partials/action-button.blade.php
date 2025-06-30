@@ -15,6 +15,7 @@
                 $label = $action['label'] ?? 'Action';
                 $icon = $action['icon'] ?? 'bx bx-dots-horizontal-rounded';
                 $event = $action['event'] ?? null;
+                $id = $action['id'] ?? null;
                 $route = $action['route'] ?? null;
                 $confirm = $action['confirm'] ?? false;
                 $class = $action['class'] ?? '';
@@ -27,10 +28,18 @@
                 <li>
                     <a class="dropdown-item {{ $class }}" href="javascript:void(0);"
                        @if ($confirm)
-                           onclick="if(confirm('{{ __('Are you sure?') }}')) { Livewire.dispatch('{{ $event }}') }"
+                            @if ($id)
+                                onclick="if(confirm('{{ __('Are you sure?') }}')) { Livewire.dispatch('{{ $event }}', { id: {{ $id }} }) }"
+                           @else
+                                onclick="if(confirm('{{ __('Are you sure?') }}')) { Livewire.dispatch('{{ $event }}') }"
+                            @endif
                        @else
-                           wire:click.prevent="$dispatch('{{ $event }}')"
-                       @endif
+                            @if ($id)
+                                wire:click.prevent="$dispatch('{{ $event }}', { id: {{ $id }} })"
+                           @else
+                                wire:click.prevent="$dispatch('{{ $event }}')"
+                            @endif
+                        @endif
                     >
                         <b><i class="{{ $icon }}"></i> {{ $label }}</b>
                     </a>

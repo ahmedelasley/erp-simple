@@ -40,13 +40,9 @@ trait HasAdvancedAlerts
     /**
      * Common error alert.
      */
-    protected function errorAlert()
+    protected function errorAlert($title = "Error", $message = 'Something went wrong.', $type = 'error',  array $options = [])
     {
-        $this->showCustomAlert('Success', __('Something went wrong, try .'), 'success',
-            [
-                // 'toast' => true,
-            ]
-        );
+        $this->showCustomAlert($title , __($message), $type, $options);
     }
 
 }
