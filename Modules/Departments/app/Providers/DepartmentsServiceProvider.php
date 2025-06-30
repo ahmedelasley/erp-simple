@@ -38,7 +38,10 @@ class DepartmentsServiceProvider extends ServiceProvider
 
         // Register Livewire Components
         Livewire::component('departments.get-data', \Modules\Departments\Livewire\Departments\GetData::class);
+        Livewire::component('departments.show', \Modules\Departments\Livewire\Departments\Partials\Show::class);
         Livewire::component('departments.create', \Modules\Departments\Livewire\Departments\Partials\Create::class);
+        Livewire::component('departments.edit', \Modules\Departments\Livewire\Departments\Partials\Edit::class);
+        Livewire::component('departments.delete', \Modules\Departments\Livewire\Departments\Partials\Delete::class);
 
         // Register Observers
         Department::observe(DepartmentObserver::class);

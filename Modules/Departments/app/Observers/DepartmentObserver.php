@@ -19,7 +19,7 @@ class DepartmentObserver extends BaseObserver
 
     protected function onUpdating($department)
     {
-        $department->last_updated_at = now();
+        // $department->last_updated_at = now();
     }
 
     protected function onDeleting($department)

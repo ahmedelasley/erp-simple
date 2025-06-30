@@ -10,17 +10,17 @@ abstract class BaseUpdateRequest extends BaseRequest
      *
      * @var mixed
      */
-    protected mixed $modelId;
+    protected mixed $id;
 
     /**
      * BaseUpdateRequest constructor.
      *
      * @param mixed $modelId
      */
-    public function __construct($modelId = null)
+    public function __construct($id = null)
     {
         parent::__construct();
-        $this->modelId = $modelId;
+        $this->id = $id;
     }
 
     /**

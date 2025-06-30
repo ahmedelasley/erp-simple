@@ -54,13 +54,12 @@
                     <td><b>{{ $value->children_count }}</b></td>
                     <td><b><x-core::partials.date-format :date="$value->created_at" /></b></td>
 
-
                     <x-core::tables.partials.action-button 
                         :actions="[
-                            ['label' => __('Details'), 'event' => 'show_user', 'icon' => 'bx bx-info-circle'],
-                            ['label' => __('Edit'), 'event' => 'edit_user', 'icon' => 'bx bx-edit'],
+                            ['label' => __('Details'), 'event' => 'show_department', 'id' => $value->id, 'icon' => 'bx bx-info-circle'],
+                            ['label' => __('Edit'), 'event' => 'edit_department', 'id' => $value->id, 'icon' => 'bx bx-edit'],
                             ['divider' => true],
-                            ['label' => __('Delete'), 'event' => 'delete_user', 'icon' => 'bx bx-trash', 'class' => 'text-danger', 'confirm' => true],
+                            ['label' => __('Delete'), 'event' => 'delete_department', 'id' => $value->id, 'icon' => 'bx bx-trash', 'class' => 'text-danger', 'confirm' => true],
                         ]" 
                     />
 

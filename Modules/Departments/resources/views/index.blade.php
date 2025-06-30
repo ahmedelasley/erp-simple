@@ -22,6 +22,10 @@
                     @livewire('departments.get-data')
 				</div>
 				<!-- row closed -->
+                @livewire('departments.show', [], 'show_department_' . now()->timestamp )
+                @livewire('departments.edit', [], 'edit_department_' . now()->timestamp )
+                @livewire('departments.delete', [], 'delete_department_' . now()->timestamp )
+
 			</div>
 			<!-- Container closed -->
 		</div>
@@ -32,17 +36,17 @@
         window.addEventListener('create-department-modal', event => {
             $('#createModal').modal('toggle');
         })
-        // window.addEventListener('show-department-modal', event => {
-        //     $('#showModal').modal('toggle');
-        // })
-        // window.addEventListener('edit-department-modal', event => {
-        //     $('#editModal').modal('toggle');
-        // })
+        window.addEventListener('show-department-modal', event => {
+            $('#showModal').modal('toggle');
+        })
+        window.addEventListener('edit-department-modal', event => {
+            $('#editModal').modal('toggle');
+        })
         // window.addEventListener('toggle-status-department-modal', event => {
         //     $('#statusModal').modal('toggle');
         // })
-        // window.addEventListener('delete-department-modal', event => {
-        //     $('#deleteModal').modal('toggle');
-        // })
+        window.addEventListener('delete-department-modal', event => {
+            $('#deleteModal').modal('toggle');
+        })
     </script>
 @endsection

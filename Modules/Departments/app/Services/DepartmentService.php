@@ -20,6 +20,11 @@ class DepartmentService implements DepartmentServiceInterface
         return $this->repository->all($filters);
     }
 
+    public function find($id)
+    {
+        return $this->repository->create($id);
+    }
+
     public function create(array $data)
     {
         return $this->repository->create($data);
