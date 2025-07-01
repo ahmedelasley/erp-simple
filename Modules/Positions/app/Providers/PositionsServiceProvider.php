@@ -7,7 +7,14 @@ use Illuminate\Support\ServiceProvider;
 use Nwidart\Modules\Traits\PathNamespace;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use Modules\Positions\Services\PositionService;
+use Modules\Positions\Repositories\PositionRepository;
+use Modules\Positions\Interfaces\PositionServiceInterface;
+use Modules\Positions\Interfaces\PositionRepositoryInterface;
+use Livewire\Livewire;
 
+use Modules\Positions\Models\Position;
+use Modules\Positions\Observers\PositionObserver;
 class PositionsServiceProvider extends ServiceProvider
 {
     use PathNamespace;
@@ -27,6 +34,19 @@ class PositionsServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->name, 'database/migrations'));
+
+        // Register Livewire Components
+        Livewire::component('positions.get-data', \Modules\Positions\Livewire\Positions\GetData::class);
+        Livewire::component('positions.show', \Modules\Positions\Livewire\Positions\Partials\Show::class);
+        Livewire::component('positions.create', \Modules\Positions\Livewire\Positions\Partials\Create::class);
+        Livewire::component('positions.edit', \Modules\Positions\Livewire\Positions\Partials\Edit::class);
+        Livewire::component('positions.delete', \Modules\Positions\Livewire\Positions\Partials\Delete::class);
+
+        // $this->loadViewsFrom(module_path('positions', 'resources/views/livewire'), 'positions');
+
+        // Register Observers
+        Position::observe(PositionObserver::class);
+
     }
 
     /**
@@ -36,6 +56,8 @@ class PositionsServiceProvider extends ServiceProvider
     {
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
+        $this->app->bind(PositionRepositoryInterface::class, PositionRepository::class);
+        $this->app->bind(PositionServiceInterface::class, PositionService::class);
     }
 
     /**
