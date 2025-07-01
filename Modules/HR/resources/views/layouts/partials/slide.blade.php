@@ -3,3 +3,6 @@
 @module('Departments')
     @include('departments::layouts.partials.slide')
 @endmodule
+@module('Positions')
+    @include('positions::layouts.partials.slide')
+@endmodule
