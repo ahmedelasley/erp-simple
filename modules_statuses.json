@@ -3,5 +3,6 @@
     "AuthCore": true,
     "Dashboard": true,
     "HR": true,
-    "Departments": true
+    "Departments": true,
+    "Positions": true
 }
