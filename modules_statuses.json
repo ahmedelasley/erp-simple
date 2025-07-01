@@ -2,5 +2,6 @@
     "Core": true,
     "AuthCore": true,
     "Dashboard": true,
+    "HR": true,
     "Departments": true
 }
