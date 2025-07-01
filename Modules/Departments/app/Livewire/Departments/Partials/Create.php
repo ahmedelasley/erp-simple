@@ -9,6 +9,19 @@ use Modules\Departments\Interfaces\DepartmentServiceInterface;
 
 class Create extends BaseComponent
 {
+
+    // public string $tilte = 'Departments';
+    public string $tilteModal = 'Add New';
+    public  $subTilteModal = 'Department';
+    // public string $tilte_lower = 'departments';
+    public string $modal_id = 'create';
+
+    public string $value = 'Save';
+    public string $classBtn = 'primary';
+    public string $clickBtn = 'submit';
+    public string $target = 'submit';
+
+
     public string $name = '';
     public string $description = '';
     public ?int $parent_id = null;
@@ -30,7 +43,7 @@ class Create extends BaseComponent
     }
 
 
-        public function submit(DepartmentServiceInterface $service): void
+    public function submit(DepartmentServiceInterface $service): void
     {
         $validated = $this->validate();
         if (isset($validated['parent_id']) && $validated['parent_id'] == '') {
@@ -72,7 +85,7 @@ class Create extends BaseComponent
 
         $data = $service->All($filters)->get();
 
-        return view('departments::livewire.departments.partials.create', [
+        return view('departments::livewire.departments.partials.form', [
             'data' => $data,
         ]);
     }

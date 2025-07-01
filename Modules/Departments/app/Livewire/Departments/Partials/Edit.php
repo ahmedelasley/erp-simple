@@ -10,9 +10,22 @@ use Modules\Departments\Models\Department;
 
 class Edit extends BaseComponent
 {
+
+        public string $tilteModal = 'Edit';
+    public  $subTilteModal = 'Department';
+    // public string $tilte_lower = 'departments';
+    public string $modal_id = 'edit';
+
+    public string $value = 'Update';
+    public string $classBtn = 'success';
+    public string $clickBtn = 'submit';
+    public string $target = 'submit';
+
+
     /** @var Department|null */
     public $model = null;
 
+    public ?int $id = null;
     public string $name = '';
     public string $description = '';
     public ?int $parent_id = null;
@@ -32,6 +45,7 @@ class Edit extends BaseComponent
         }
 
         // Set the properties
+        $this->id = $this->model->id;
         $this->name = $this->model->name;
         $this->description = $this->model->description;
         $this->parent_id = $this->model->parent_id;
@@ -101,9 +115,11 @@ class Edit extends BaseComponent
 
         $filters = [];
 
-        $data = $service->All($filters)->get();
+        $data = $service->All($filters)
+            ->where('id', '!=', $this->id)
+            ->get();
 
-        return view('departments::livewire.departments.partials.edit', [
+        return view('departments::livewire.departments.partials.form', [
             'data' => $data,
         ]);
     }

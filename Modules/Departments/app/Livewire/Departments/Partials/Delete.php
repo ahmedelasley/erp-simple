@@ -9,12 +9,23 @@ use Modules\Departments\Models\Department;
 
 class Delete extends BaseComponent
 {
+
+
+
+
     /** @var Department|null */
     public $model = null;
 
-    public string $name = '';
-    public string $description = '';
-    public ?int $parent_id = null;
+    // public string $tilte = 'Departments';
+    public string $tilteModal = 'Delete';
+    public  $subTilteModal = 'Department';
+    // public string $tilte_lower = 'departments';
+    public string $modal_id = 'delete';
+
+    public string $value = 'Yes';
+    public string $classBtn = 'danger';
+    public string $clickBtn = 'submit';
+    public string $target = 'submit';
 
     protected $listeners = ['delete_department'];
 
@@ -29,10 +40,6 @@ class Delete extends BaseComponent
             return;
         }
 
-        // Set the properties
-        $this->name = $this->model->name;
-        $this->description = $this->model->description;
-        $this->parent_id = $this->model->parent_id;
 
         // Reset validation and errors
         $this->resetValidation();
@@ -50,7 +57,7 @@ class Delete extends BaseComponent
         $this->close();
 
         // Close the modal on the frontend
-        // $this->closeModal('delete-department-modal');
+        $this->closeModal('delete-department-modal');
 
         // Refresh the department table
         // $this->dispatch('refreshData')->to(GetData::class);
@@ -72,9 +79,9 @@ class Delete extends BaseComponent
         $this->resetErrorBag();
 
         // Refresh the department table
-        $this->dispatch('refreshData')->to(GetData::class);
+        $this->dispatch('refreshData');
         // Close the modal on the frontend
-        $this->closeModal('delete-department-modal');
+        // $this->closeModal('delete-department-modal');
     }
 
     public function render(DepartmentServiceInterface $service)
@@ -84,7 +91,7 @@ class Delete extends BaseComponent
 
         $data = $service->All($filters)->get();
 
-        return view('departments::livewire.departments.partials.delete', [
+        return view('departments::livewire.departments.partials.form', [
             'data' => $data,
         ]);
     }

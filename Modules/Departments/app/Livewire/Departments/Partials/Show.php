@@ -9,6 +9,19 @@ use Modules\Departments\Models\Department;
 
 class Show extends BaseComponent
 {
+
+        // public string $tilte = 'Departments';
+    public string $tilteModal = 'Show';
+    public  $subTilteModal = 'Department';
+    // public string $tilte_lower = 'departments';
+    public string $modal_id = 'show';
+
+    public string $value = 'Show';
+    public string $classBtn = 'primary';
+    public string $clickBtn = 'submit';
+    public string $target = 'submit';
+
+
     /** @var Department|null */
     public $model = null;
 
@@ -64,7 +77,7 @@ class Show extends BaseComponent
 
         $data = $service->All($filters)->get();
 
-        return view('departments::livewire.departments.partials.show', [
+        return view('departments::livewire.departments.partials.form', [
             'data' => $data,
         ]);
     }
