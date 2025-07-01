@@ -6,6 +6,7 @@
     'class' => '',
     'type' => 'text',
     'label' => '',
+    'livewire' => false,
 ])
 
 
@@ -21,6 +22,9 @@
       value="{{ old($name, $value) }}"
       autocomplete="{{ $autocomplete }}"
       {{ $attributes->merge(['class' => 'form-control ' . $class]) }}
+      @if($livewire)
+      wire:model.live='{{ $name }}'
+      @endif
   />
 
   @error($name)

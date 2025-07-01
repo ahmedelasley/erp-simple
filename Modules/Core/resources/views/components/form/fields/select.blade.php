@@ -1,19 +1,22 @@
 @props([
     'name',
-    'options' => [],
+    'label' => __('Select...'),
     'placeholder' => __('Select...'),
     'class' => '',
+    'livewire' => false,
+
 ])
 
 <div class="mb-3">
+    <label class="main-content-label tx-12 tx-medium">{{ __($label) }}</label>
+
     <select name="{{ $name }}" id="{{ $name }}"
-        {{ $attributes->merge(['class' => 'form-select ' . $class]) }}>
-        <option value="">{{ $placeholder }}</option>
-        @foreach ($options as $value => $label)
-            <option value="{{ $value }}" @selected(old($name, $attributes->get('value')) == $value)>
-                {{ $label }}
-            </option>
-        @endforeach
+        @if($livewire)
+            wire:model.live='{{ $name }}'
+        @endif
+        {{ $attributes->merge(['class' => 'form-control ' . $class]) }}>
+        <option value="">{{ __($placeholder) }}</option>
+        {{ $slot }}
     </select>
 
     @error($name)
@@ -22,9 +25,4 @@
 </div>
 
 {{-- Usage example --}}
-{{-- <x-form.fields.select name="country" :options="$countries" placeholder="Select Country" class="custom-select" /> --}}
-{{-- This will render a select dropdown with the specified name, options, and placeholder. --}}
-{{-- You can also pass additional attributes using the $attributes variable. --}}
-{{-- Example: --}}
-{{-- <x-form.fields.select name="category" :options="$categories" class="form-select" /> --}}
-{{-- This will render a select dropdown for categories with the specified class. --}}
+
