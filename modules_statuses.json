@@ -5,5 +5,6 @@
     "HR": true,
     "Departments": true,
     "Positions": true,
-    "Employees": true
+    "Employees": true,
+    "Attendances": true
 }
