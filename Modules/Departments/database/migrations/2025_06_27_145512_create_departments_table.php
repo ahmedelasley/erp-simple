@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->text('description')->nullable();
-            $table->foreignId('parent_id')->nullable()->constrained('departments')->onDelete('set null');
+            $table->foreignId('parent_id')->nullable()->constrained('departments')->onUpdate('cascade')->onDelete('set null');
 
             // ✅ Polymorphic Relations for auditing
             $table->morphs('creator'); // creator_type, creator_id
