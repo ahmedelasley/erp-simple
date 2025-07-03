@@ -50,7 +50,7 @@ class Edit extends BaseComponent
         $this->id = $this->model->id;
         $this->name = $this->model->name;
         $this->description = $this->model->description;
-        $this->level = $this->model->level;
+        $this->level = $this->model->level->value;
         $this->department_id = $this->model->department_id;
 
         // Reset validation and errors

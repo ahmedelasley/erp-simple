@@ -4,9 +4,9 @@
     <x-core::form.fields.input-label-error type="text"  livewire="true" name="description" placeholder="Enter Description"  label="Description" value="{{old('description')}}" required />
     <x-core::form.fields.select name="level" livewire="true" label='Position Level' placeholder="Select a Level..." class="" >
         @forelse (\Modules\Positions\Enums\PositionLevel::options() as $value => $label)
-            <option value="{{ $value }}" wire:key="department-{{ $value }}" >{{ $label }}</option>
+            <option value="{{ $value }}" wire:key="level-{{ $value }}" >{{ $label }}</option>
         @empty
-            <option value="0" wire:key="department-none">None</option>
+            <option value="0" wire:key="level-none">None</option>
         @endforelse
     </x-core::form.fields.select>
 
