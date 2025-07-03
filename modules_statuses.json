@@ -4,5 +4,6 @@
     "Dashboard": true,
     "HR": true,
     "Departments": true,
-    "Positions": true
+    "Positions": true,
+    "Employees": true
 }
