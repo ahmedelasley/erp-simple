@@ -23,7 +23,7 @@ return new class extends Migration
                     // ->default(EmployeeStatus::Active->value)
                     ->index();
 
-            $table->foreignId('department_id')->constrained()->onDelete('cascade');
+            $table->foreignId('department_id')->constrained()->onUpdate('cascade')->onDelete('set null');
 
             // ✅ Polymorphic Relations for auditing
             $table->morphs('creator'); // creator_type, creator_id
