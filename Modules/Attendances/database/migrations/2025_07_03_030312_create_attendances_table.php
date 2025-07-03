@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('employee_id')->constrained()->onUpdate('cascade')->onDelete('set null');
+            $table->foreignId('employee_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('set null');
 
             $table->dateTime('check_in');
             $table->dateTime('check_out');
