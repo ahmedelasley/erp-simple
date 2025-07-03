@@ -3,8 +3,7 @@
 namespace Modules\Employees\Enums;
 use Modules\Core\Traits\HasBaseEnumFeatures;
 
-enum EmployeeStatus {}
-enum PositionLevel: string
+enum EmployeeStatus: string
 {
     use HasBaseEnumFeatures;
 

@@ -22,8 +22,8 @@ return new class extends Migration
 
             $table->enum('gender', ['male', 'female']);
             $table->string('national_id')->nullable();
-            $table->foreignId('position_id')->constrained()->onUpdate('cascade')->onDelete('set null');
-            $table->foreignId('department_id')->constrained()->onUpdate('cascade')->onDelete('set null');
+            $table->foreignId('position_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('set null');
+            $table->foreignId('department_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('set null');
             $table->date('hire_date');
             $table->string('photo')->nullable();
 

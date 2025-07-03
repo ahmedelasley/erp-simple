@@ -7,7 +7,14 @@ use Illuminate\Support\ServiceProvider;
 use Nwidart\Modules\Traits\PathNamespace;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use Modules\Employees\Services\EmployeeService;
+use Modules\Employees\Repositories\EmployeeRepository;
+use Modules\Employees\Interfaces\EmployeeServiceInterface;
+use Modules\Employees\Interfaces\EmployeeRepositoryInterface;
+use Livewire\Livewire;
 
+use Modules\Employees\Models\Employee;
+use Modules\Employees\Observers\EmployeeObserver;
 class EmployeesServiceProvider extends ServiceProvider
 {
     use PathNamespace;
@@ -27,6 +34,19 @@ class EmployeesServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->name, 'database/migrations'));
+
+        // Register Livewire Components
+        Livewire::component('employees.get-data', \Modules\Employees\Livewire\Employees\GetData::class);
+        Livewire::component('employees.show', \Modules\Employees\Livewire\Employees\Partials\Show::class);
+        Livewire::component('employees.create', \Modules\Employees\Livewire\Employees\Partials\Create::class);
+        Livewire::component('employees.edit', \Modules\Employees\Livewire\Employees\Partials\Edit::class);
+        Livewire::component('employees.delete', \Modules\Employees\Livewire\Employees\Partials\Delete::class);
+
+        // $this->loadViewsFrom(module_path('Employees', 'resources/views/livewire'), 'Employees');
+
+        // Register Observers
+        Employee::observe(EmployeeObserver::class);
+
     }
 
     /**
@@ -36,6 +56,8 @@ class EmployeesServiceProvider extends ServiceProvider
     {
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
+        $this->app->bind(EmployeeRepositoryInterface::class, EmployeeRepository::class);
+        $this->app->bind(EmployeeServiceInterface::class, EmployeeService::class);
     }
 
     /**

@@ -39,7 +39,6 @@ class Employee extends BaseModel
         return $this->belongsTo(Department::class);
     }
 
-
     public function attendances(): HasMany
     {
         return $this->hasMany(Attendance::class);

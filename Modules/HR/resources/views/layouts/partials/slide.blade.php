@@ -6,3 +6,6 @@
 @module('Positions')
     @include('positions::layouts.partials.slide')
 @endmodule
+@module('Employees')
+    @include('employees::layouts.partials.slide')
+@endmodule
