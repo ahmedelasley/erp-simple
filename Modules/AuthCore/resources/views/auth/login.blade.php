@@ -26,10 +26,10 @@
                                                 <form method="POST" action="{{ route('login') }}">
                                                     @csrf
 													<div class="form-group">
-														<x-core::form.fields.input-label-error type="email"  name="email" placeholder="Enter Email"  label="{{ __('Email') }}" value="{{old('email')}}" required autofocus autocomplete="username"/>
+														<x-core::form.fields.input-label-error type="email"  name="email" placeholder="Enter Email"  label="{{ __('Email') }}" value="username@domain.com{{old('email')}}" required autofocus autocomplete="username"/>
 													</div>
 													<div class="form-group">
-														<x-core::form.fields.input-label-error type="password"  name="password" placeholder="Enter Password"  label="{{ __('Password') }}" value="{{old('password')}}" required autocomplete="current-password"/>
+														<x-core::form.fields.input-label-error type="password"  name="password" placeholder="Enter Password"  label="{{ __('Password') }}" value="Pa$$w0rd!{{old('password')}}" required autocomplete="current-password"/>
 													</div>
 													<button class="btn btn-main-primary btn-block">{{ __('Sign In') }}</button>
 													<div class="row row-xs">
