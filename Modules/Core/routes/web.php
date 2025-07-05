@@ -6,3 +6,7 @@ use Modules\Core\Http\Controllers\CoreController;
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('cores', CoreController::class)->names('core');
 });
+
+Route::get('/', function () {
+    return view('core::welcome');
+});
