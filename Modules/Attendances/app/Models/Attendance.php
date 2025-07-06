@@ -19,8 +19,8 @@ class Attendance extends BaseModel
     protected $casts = [
         'check_in'      => 'datetime:Y-m-d H:i:s',
         'check_out'      => 'datetime:Y-m-d H:i:s',
-        'hours_worked' => 'decimal:8,2',
-        'date' => 'date',
+        'hours_worked' => 'decimal:2',
+        'date' => 'date:Y-m-d',
         'status' => AttendanceStatus::class,
         'created_at' => 'datetime:Y-m-d H:i:s',
         'updated_at' => 'datetime:Y-m-d H:i:s',
@@ -28,7 +28,7 @@ class Attendance extends BaseModel
 
     ];
 
-        public function employee()
+    public function employee()
     {
         return $this->belongsTo(Employee::class);
     }

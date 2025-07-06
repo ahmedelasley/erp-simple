@@ -7,7 +7,14 @@ use Illuminate\Support\ServiceProvider;
 use Nwidart\Modules\Traits\PathNamespace;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use Modules\Attendances\Services\AttendanceService;
+use Modules\Attendances\Repositories\AttendanceRepository;
+use Modules\Attendances\Interfaces\AttendanceServiceInterface;
+use Modules\Attendances\Interfaces\AttendanceRepositoryInterface;
+use Livewire\Livewire;
 
+use Modules\Attendances\Models\Attendance;
+use Modules\Attendances\Observers\AttendanceObserver;
 class AttendancesServiceProvider extends ServiceProvider
 {
     use PathNamespace;
@@ -27,6 +34,17 @@ class AttendancesServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->name, 'database/migrations'));
+
+        // Register Livewire Components
+        Livewire::component('attendances.get-data', \Modules\Attendances\Livewire\Attendances\GetData::class);
+        Livewire::component('attendances.show', \Modules\Attendances\Livewire\Attendances\Partials\Show::class);
+        Livewire::component('attendances.create', \Modules\Attendances\Livewire\Attendances\Partials\Create::class);
+        Livewire::component('attendances.edit', \Modules\Attendances\Livewire\Attendances\Partials\Edit::class);
+        Livewire::component('attendances.delete', \Modules\Attendances\Livewire\Attendances\Partials\Delete::class);
+
+        // Register Observers
+        Attendance::observe(AttendanceObserver::class);
+
     }
 
     /**
@@ -36,6 +54,9 @@ class AttendancesServiceProvider extends ServiceProvider
     {
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
+        $this->app->bind(AttendanceRepositoryInterface::class, AttendanceRepository::class);
+        $this->app->bind(AttendanceServiceInterface::class, AttendanceService::class);
+
     }
 
     /**

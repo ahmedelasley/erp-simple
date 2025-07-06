@@ -21,7 +21,6 @@ class AttendanceUpdateRequest extends BaseUpdateRequest
             'employee_id' => 'required|integer|min:1|exists:employees,id',
             'check_in'      => 'required|date|before_or_equal:check_out',
             'check_out'     => 'required|date|after_or_equal:check_in',
-            // 'hours_worked'  => 'nullable|numeric|min:0|max:999999.99',
             'date'          => 'required|date|before_or_equal:today',
             'status' => [new Enum(AttendanceStatus::class)],
         ];
