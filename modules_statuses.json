@@ -6,5 +6,11 @@
     "Departments": true,
     "Positions": true,
     "Employees": true,
-    "Attendances": true
+    "Attendances": true,
+    "Accounting": true,
+    "ChartOfAccounts": true,
+    "JournalEntries": true,
+    "Vouchers": true,
+    "FiscalYears": true,
+    "AccountTypes": true
 }

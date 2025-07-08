@@ -1,0 +1,11 @@
+{
+    "name": "ChartOfAccounts",
+    "alias": "chartofaccounts",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\ChartOfAccounts\\Providers\\ChartOfAccountsServiceProvider"
+    ],
+    "files": []
+}
