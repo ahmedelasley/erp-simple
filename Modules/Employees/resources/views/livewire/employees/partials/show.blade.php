@@ -1,4 +1,4 @@
-<!-- Start Show modal -->
+<!-- Start Show Form -->
 <form>
     <div class="d-flex justify-content-between form-control" readonly>
         <h1 class="tx-26 text-primary text-bold">{{ $model?->name }}</h1>
@@ -16,4 +16,4 @@
         </div>
     </h6>
 </form>
-<!-- End Show modal -->
+<!-- End Show Form -->
