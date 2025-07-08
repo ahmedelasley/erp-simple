@@ -82,7 +82,7 @@
 
     @if($isError)
         @error($name)
-            <small class="text-danger d-block mt-1">{{ $message }}</small>
+            <small class="bg-danger tx-white d-block px-1 py-1">{{ $message }}</small>
         @enderror
     @endif
 </div>
