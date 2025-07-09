@@ -1,0 +1,11 @@
+{
+    "name": "AccountingSettings",
+    "alias": "accountingsettings",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\AccountingSettings\\Providers\\AccountingSettingsServiceProvider"
+    ],
+    "files": []
+}

@@ -12,5 +12,6 @@
     "JournalEntries": true,
     "Vouchers": true,
     "FiscalYears": true,
-    "AccountTypes": true
+    "AccountTypes": true,
+    "AccountingSettings": true
 }
