@@ -7,6 +7,16 @@ use Illuminate\Support\ServiceProvider;
 use Nwidart\Modules\Traits\PathNamespace;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use Livewire\Livewire;
+
+use Modules\ChartOfAccounts\Services\AccountService;
+use Modules\ChartOfAccounts\Services\GenerateAccountCodeService;
+use Modules\ChartOfAccounts\Interfaces\AccountServiceInterface;
+use Modules\ChartOfAccounts\Interfaces\AccountRepositoryInterface;
+use Modules\ChartOfAccounts\Repositories\AccountRepository;
+
+use Modules\ChartOfAccounts\Models\Account;
+use Modules\ChartOfAccounts\Observers\AccountObserver;
 
 class ChartOfAccountsServiceProvider extends ServiceProvider
 {
@@ -27,6 +37,16 @@ class ChartOfAccountsServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->name, 'database/migrations'));
+
+        // Register Livewire Components
+        Livewire::component('accounts.get-data', \Modules\Accounts\Livewire\Accounts\GetData::class);
+        Livewire::component('accounts.show', \Modules\Accounts\Livewire\Accounts\Partials\Show::class);
+        Livewire::component('accounts.create', \Modules\Accounts\Livewire\Accounts\Partials\Create::class);
+        Livewire::component('accounts.edit', \Modules\Accounts\Livewire\Accounts\Partials\Edit::class);
+        Livewire::component('accounts.delete', \Modules\Accounts\Livewire\Accounts\Partials\Delete::class);
+
+        // Register Observers
+        Account::observe(AccountObserver::class);
     }
 
     /**
@@ -36,6 +56,13 @@ class ChartOfAccountsServiceProvider extends ServiceProvider
     {
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
+        
+        $this->app->bind(AccountRepositoryInterface::class, AccountRepository::class);
+        $this->app->bind(AccountServiceInterface::class, AccountService::class);
+
+        $this->app->singleton(GenerateAccountCodeService::class);
+
+
     }
 
     /**
