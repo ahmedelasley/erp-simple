@@ -4,24 +4,27 @@ namespace Modules\ChartOfAccounts\Models;
 
 use Modules\Core\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Modules\AccountTypes\Models\AccountType;
+// use Modules\AccountTypes\Models\AccountType;
 use Modules\JournalEntries\Models\JournalEntryItem;
 use Modules\Vouchers\Models\VoucherItem;
 use Modules\ChartOfAccounts\Enums\AccountCategory;
 use Modules\ChartOfAccounts\Enums\AccountLevel;
 use Modules\ChartOfAccounts\Enums\AccountStatus;
+use Modules\ChartOfAccounts\Enums\AccountType;
+
 class Account extends BaseModel
 {
     protected $table = 'accounts';
     /**
      * The attributes that are mass assignable.
      */
-    protected $fillable = ['code', 'name', 'type_id', 'description', 'parent_id', 'level', 'category', 'status'];
+    protected $fillable = ['code', 'name', 'type', 'description', 'parent_id', 'level', 'category', 'status'];
 
     /**
      * The attributes that should be cast to native types.
      */
     protected $casts = [
+        'type' => AccountType::class,
         'level' => AccountLevel::class,
         'category' => AccountCategory::class,
         'status' => AccountStatus::class,
@@ -38,10 +41,10 @@ class Account extends BaseModel
         return $this->hasMany(Account::class, 'parent_id');
     }
 
-    public function accountType()
-    {
-        return $this->belongsTo(AccountType::class, 'type_id');
-    }
+    // public function accountType()
+    // {
+    //     return $this->belongsTo(AccountType::class, 'type_id');
+    // }
 
     public function journalEntryItems() :HasMany
     {
@@ -52,5 +55,5 @@ class Account extends BaseModel
     {
         return $this->hasMany(VoucherItem::class);
     }
- 
+
 }

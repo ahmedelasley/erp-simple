@@ -39,11 +39,11 @@ class ChartOfAccountsServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(module_path($this->name, 'database/migrations'));
 
         // Register Livewire Components
-        Livewire::component('accounts.get-data', \Modules\Accounts\Livewire\Accounts\GetData::class);
-        Livewire::component('accounts.show', \Modules\Accounts\Livewire\Accounts\Partials\Show::class);
-        Livewire::component('accounts.create', \Modules\Accounts\Livewire\Accounts\Partials\Create::class);
-        Livewire::component('accounts.edit', \Modules\Accounts\Livewire\Accounts\Partials\Edit::class);
-        Livewire::component('accounts.delete', \Modules\Accounts\Livewire\Accounts\Partials\Delete::class);
+        Livewire::component('accounts.get-data', \Modules\ChartOfAccounts\Livewire\Accounts\GetData::class);
+        Livewire::component('accounts.create', \Modules\ChartOfAccounts\Livewire\Accounts\Partials\Create::class);
+        // Livewire::component('accounts.show', \Modules\ChartOfAccounts\Livewire\Accounts\Partials\Show::class);
+        // Livewire::component('accounts.edit', \Modules\ChartOfAccounts\Livewire\Accounts\Partials\Edit::class);
+        // Livewire::component('accounts.delete', \Modules\ChartOfAccounts\Livewire\Accounts\Partials\Delete::class);
 
         // Register Observers
         Account::observe(AccountObserver::class);
@@ -56,7 +56,7 @@ class ChartOfAccountsServiceProvider extends ServiceProvider
     {
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
-        
+
         $this->app->bind(AccountRepositoryInterface::class, AccountRepository::class);
         $this->app->bind(AccountServiceInterface::class, AccountService::class);
 

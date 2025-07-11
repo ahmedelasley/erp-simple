@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 use Modules\ChartOfAccounts\Enums\AccountCategory;
 use Modules\ChartOfAccounts\Enums\AccountLevel;
 use Modules\ChartOfAccounts\Enums\AccountStatus;
+use Modules\ChartOfAccounts\Enums\AccountType;
 
 return new class extends Migration
 {
@@ -19,9 +20,12 @@ return new class extends Migration
             $table->string('code')->unique();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->foreignId('type_id')->nullable()->constrained('account_types')->onUpdate('cascade')->onDelete('set null'); // foreign key to account_types table
+
+            // $table->foreignId('type_id')->nullable()->constrained('account_types')->onUpdate('cascade')->onDelete('set null'); // foreign key to account_types table
             $table->foreignId('parent_id')->nullable()->constrained('accounts')->onUpdate('cascade')->onDelete('set null'); // self-referencing foreign key
-          
+            $table->enum('type',array_column(AccountType::cases(), 'value'))
+                ->default(AccountType::cases()[0]->value)
+                ->index();
             $table->enum('level',array_column(AccountLevel::cases(), 'value'))
                 ->default(AccountLevel::cases()[0]->value)
                 ->index();

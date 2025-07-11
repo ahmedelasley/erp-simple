@@ -45,7 +45,7 @@
                     </tr>
                     <tbody>
                         @foreach ($data as $account)
-                            @include('chartofaccounts::livewire.accounts.partials.account-row', ['account' => $account, 'level' => 1])
+                            @include('chartofaccounts::livewire.accounts.partials.account-row', ['account' => $account, 'level' => 1, 'depth' => 0])
                         @endforeach
                     </tbody>
                 </table>

@@ -15,9 +15,9 @@ class GetData extends Component
 
     public string $search = '';
     public string $searchField = 'code';
-    public string $sortField = 'id';
-    public string $sortDirection = 'desc';
-    public int $paginate = 1;
+    public string $sortField = 'code';
+    public string $sortDirection = 'asc';
+    public int $paginate = 10;
     public int $page = 1;
 
 
@@ -66,7 +66,7 @@ class GetData extends Component
     /**
      * Refresh the component and reset pagination.
      */
-    public function selectPaginate(int $count = 1): void
+    public function selectPaginate(int $count = 10): void
     {
         $this->paginate = $count;
         $this->resetPage();
@@ -90,9 +90,7 @@ class GetData extends Component
     {
         $filters = [];
 
-        $data = $service->All($filters)
-        // $data = Account::with(['children']) // جلب علاقة الأب مباشرة
-        ->whereNull('parent_id')
+        $data = $service->All($filters)->with(['children'])->whereNull('parent_id')
         // ->get();
         // ->withCount('children') // جلب عدد الأبناء تلقائيًا
         ->when($this->search, fn($q) => $q->where($this->searchField, 'like', '%' . $this->search . '%'))
