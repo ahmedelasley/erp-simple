@@ -28,6 +28,9 @@
             @module('HR')
                 @include('hr::layouts.partials.slide')
             @endmodule
+            @module('Accounting')
+                @include('accounting::layouts.partials.slide')
+            @endmodule
         </ul>
     </div>
 </aside>
