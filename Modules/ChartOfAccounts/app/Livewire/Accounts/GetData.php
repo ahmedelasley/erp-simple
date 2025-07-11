@@ -1,0 +1,109 @@
+<?php
+
+namespace Modules\ChartOfAccounts\Livewire\Accounts;
+
+use Livewire\Component;
+use Livewire\WithPagination;
+use Modules\ChartOfAccounts\Models\Account;
+use Modules\ChartOfAccounts\Interfaces\AccountServiceInterface;
+
+class GetData extends Component
+{
+    use WithPagination;
+
+    protected $paginationTheme = 'bootstrap';
+
+    public string $search = '';
+    public string $searchField = 'code';
+    public string $sortField = 'id';
+    public string $sortDirection = 'desc';
+    public int $paginate = 1;
+    public int $page = 1;
+
+
+    protected $listeners = [
+        'refreshData' => 'refreshComponent',
+        'show_Account' => '$refresh',
+        'edit_Account' => '$refresh',
+        // 'toggle_status_Account' => '$refresh',
+        'delete_Account' => '$refresh',
+
+    ];
+
+    protected function queryString(): array
+    {
+        return [
+            'search' => ['except' => '', 'as' => 'q'],
+            'page'   => ['except' => 1],
+        ];
+    }
+
+    public function updatingSearch(): void
+    {
+        $this->resetPage();
+        $this->search = '';
+    }
+
+    public function updatingPaginate(): void
+    {
+        $this->resetPage();
+    }
+
+    public function searchFilter(string $field): void
+    {
+        $this->searchField = $field;
+        $this->resetPage();
+    }
+
+    public function sortBy(string $field ): void
+    {
+        $this->sortField = !$field ? 'created_at' : $field;
+        $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
+
+        $this->resetPage();
+    }
+
+    /**
+     * Refresh the component and reset pagination.
+     */
+    public function selectPaginate(int $count = 1): void
+    {
+        $this->paginate = $count;
+        $this->resetPage();
+    }
+
+    public function refreshComponent(): void
+    {
+        $this->resetPage();
+        $this->dispatch('reinit-datatable');
+    }
+
+    // resetSearch
+    public function resetSearch(): void
+    {
+        $this->search = '';
+        $this->resetPage();
+        $this->searchField = 'code';
+    }
+
+    public function render(AccountServiceInterface $service)
+    {
+        $filters = [];
+
+        $data = $service->All($filters)
+        // $data = Account::with(['children']) // جلب علاقة الأب مباشرة
+        ->whereNull('parent_id')
+        // ->get();
+        // ->withCount('children') // جلب عدد الأبناء تلقائيًا
+        ->when($this->search, fn($q) => $q->where($this->searchField, 'like', '%' . $this->search . '%'))
+        ->orderBy($this->sortField, $this->sortDirection)
+        ->paginate($this->paginate);
+
+
+        return view('chartofaccounts::livewire.accounts.get-data', [
+            'data' => $data,
+        ]);
+    }
+
+
+}
