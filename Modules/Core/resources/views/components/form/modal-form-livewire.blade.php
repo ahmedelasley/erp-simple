@@ -4,6 +4,7 @@
     'subTitle' => null,
     // 'delete' => false,
     // 'show' => false,
+    'modalClass' => '', // فئة التسمية الافتراضية لتنسيق متناسق
 
     'value' => null,
     'classBtn' => null,
@@ -23,7 +24,7 @@
 
 <!-- Start Modal -->
 <div wire:ignore.self class="modal fade" id="{{ $id }}Modal" >
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable {{ $modalClass }}" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
                 <h6 class="modal-title">{{ __($title) }} {{ __($subTitle) }}</h6>
