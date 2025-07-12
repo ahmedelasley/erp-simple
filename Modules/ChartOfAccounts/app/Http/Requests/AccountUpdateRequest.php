@@ -7,6 +7,7 @@ use Modules\Core\Http\Requests\BaseUpdateRequest;
 use Modules\ChartOfAccounts\Enums\AccountCategory;
 use Modules\ChartOfAccounts\Enums\AccountLevel;
 use Modules\ChartOfAccounts\Enums\AccountStatus;
+use Modules\ChartOfAccounts\Enums\AccountType;
 
 class AccountUpdateRequest extends BaseUpdateRequest
 {
@@ -24,8 +25,9 @@ class AccountUpdateRequest extends BaseUpdateRequest
 
             'name' => 'required|string|max:255|unique:accounts,name,' . $this->id,
             'description' => 'nullable|string|max:500',
-            'type_id' => 'required|integer|exists:account_types,id',
+            // 'type_id' => 'required|integer|exists:account_types,id',
             'parent_id' => 'nullable|integer|exists:accounts,id',
+            'type' => [new Enum(AccountType::class)],
             'level' => [new Enum(AccountLevel::class)],
             'category' => [new Enum(AccountCategory::class)],
             'status' => [new Enum(AccountStatus::class)],
