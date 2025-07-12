@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Modules\Departments\Database\Seeders\DepartmentsDatabaseSeeder;
+use Modules\ChartOfAccounts\Database\Seeders\ChartOfAccountsDatabaseSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,7 +15,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            DepartmentsDatabaseSeeder::class,
+            // DepartmentsDatabaseSeeder::class,
+            ChartOfAccountsDatabaseSeeder::class,
         ]);
 
     }
