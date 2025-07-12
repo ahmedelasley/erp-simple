@@ -4,27 +4,28 @@ namespace Modules\ChartOfAccounts\Livewire\Accounts\Partials;
 
 use Modules\Core\Livewire\BaseComponent;
 use Modules\ChartOfAccounts\Livewire\Accounts\GetData;
-use Modules\ChartOfAccounts\Http\Requests\AccountStoreRequest;
+use Modules\ChartOfAccounts\Http\Requests\AccountUpdateRequest;
+use Modules\ChartOfAccounts\Models\Account;
 use Modules\ChartOfAccounts\Interfaces\AccountServiceInterface;
 
-use Modules\Departments\Interfaces\DepartmentServiceInterface;
-
-use Modules\Positions\Interfaces\PositionServiceInterface;
-
-class Create extends BaseComponent
+class Edit extends BaseComponent
 {
 
-    // public string $tilte = 'Accounts';
-    public string $tilteModal = 'Add New';
+    public string $tilteModal = 'Edit';
     public  $subTilteModal = 'Account';
     // public string $tilte_lower = 'Accounts';
-    public string $modal_id = 'create';
+    public string $modal_id = 'edit';
 
-    public string $value = 'Save';
-    public string $classBtn = 'primary';
+    public string $value = 'Update';
+    public string $classBtn = 'success';
     public string $clickBtn = 'submit';
     public string $target = 'submit';
 
+
+    /** @var Account|null */
+    public $model = null;
+
+    public ?int $id = null;
 
     public string $name = '';
     public ?int $parent_id = null;
@@ -32,24 +33,46 @@ class Create extends BaseComponent
     public string $level = '';
     public string $category = '';
     public string $status = '';
-    public string $description = '';
+    public ?string $description = null;
 
+    protected $listeners = ['edit_account'];
 
-    // public string $phone = '';
-    // public string $gender = '';
-    // public string $national_id = '';
-    // public ?int $position_id = null;
-    // public ?int $department_id = null;
-    // public string $hire_date = '';
-    // public string $photo = '';
-    // public string $status = '';
+    public function edit_account($id)
+    {
+        $this->model = Account::findOrFail($id);
+
+        // dd($this->model);
+        if (!$this->model) {
+            // Show error alert
+            $this->errorAlert();
+            return;
+
+        }
+
+        // Set the properties
+        $this->id = $this->model->id;
+        $this->name = $this->model->name;
+        $this->parent_id = $this->model->parent_id;
+        $this->type = $this->model->type->value;
+        $this->level = $this->model->level->value;
+        $this->category = $this->model->category->value;
+        $this->status = $this->model->status->value;
+        $this->description = $this->model->description;
+
+        // Reset validation and errors
+        $this->resetValidation();
+        $this->resetErrorBag();
+
+        // Open modal
+        $this->openModal('edit-account-modal');
+    }
 
     /**
      * Validation rules using FormRequest.
      */
     protected function rules(): array
     {
-        return (new AccountStoreRequest())->rules();
+        return (new AccountUpdateRequest($this->model?->id))->rules();
     }
 
     /**
@@ -61,17 +84,17 @@ class Create extends BaseComponent
     }
 
 
-    public function submit(AccountServiceInterface $service): void
+        public function submit(AccountServiceInterface $service): void
     {
         $validated = $this->validate();
 
-        $service->create($validated);
+        $service->update($this->model, $validated);
 
 
         $this->reset();
 
         // Close the modal on the frontend
-        $this->closeModal('create-account-modal');
+        $this->closeModal('edit-account-modal');
 
         // Refresh the Account table
         $this->dispatch('refreshData')->to(GetData::class);
@@ -100,13 +123,8 @@ class Create extends BaseComponent
         // $data = $service->All($filters)->with(['children'])->whereNull('parent_id')->get();
         $data = $service->All($filters)->with(['children', 'journalEntryItems'])->whereNull('parent_id')
         ->withCount(['children', 'journalEntryItems'])->get();
-
-        // $dataDepartments = $departmentsService->All($filters)->get();
-        // $dataPositions = $positionsService->All($filters)->get();
-
         return view('chartofaccounts::livewire.accounts.partials.form', [
             'data' => $data,
-            // 'dataPositions' => $dataPositions,
         ]);
     }
 }

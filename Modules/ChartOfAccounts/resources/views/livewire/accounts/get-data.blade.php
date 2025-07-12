@@ -42,6 +42,7 @@
                         {{-- <th class="text-center">{{ __('Debit') }}</th>
                         <th class="text-center">{{ __('Credit') }}</th> --}}
                         <th class="text-center">{{ __('Balance') }}</th>
+                        <th class="text-center">{{ __('Action') }}</th>
                     </tr>
                     <tbody>
                         @foreach ($data as $account)

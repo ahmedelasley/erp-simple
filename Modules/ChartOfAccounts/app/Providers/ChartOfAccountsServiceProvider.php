@@ -41,9 +41,9 @@ class ChartOfAccountsServiceProvider extends ServiceProvider
         // Register Livewire Components
         Livewire::component('accounts.get-data', \Modules\ChartOfAccounts\Livewire\Accounts\GetData::class);
         Livewire::component('accounts.create', \Modules\ChartOfAccounts\Livewire\Accounts\Partials\Create::class);
-        // Livewire::component('accounts.show', \Modules\ChartOfAccounts\Livewire\Accounts\Partials\Show::class);
-        // Livewire::component('accounts.edit', \Modules\ChartOfAccounts\Livewire\Accounts\Partials\Edit::class);
-        // Livewire::component('accounts.delete', \Modules\ChartOfAccounts\Livewire\Accounts\Partials\Delete::class);
+        Livewire::component('accounts.show', \Modules\ChartOfAccounts\Livewire\Accounts\Partials\Show::class);
+        Livewire::component('accounts.edit', \Modules\ChartOfAccounts\Livewire\Accounts\Partials\Edit::class);
+        Livewire::component('accounts.delete', \Modules\ChartOfAccounts\Livewire\Accounts\Partials\Delete::class);
 
         // Register Observers
         Account::observe(AccountObserver::class);

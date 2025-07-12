@@ -21,9 +21,9 @@
                     @livewire('accounts.get-data')
 				</div>
 				<!-- row closed -->
-                {{-- @livewire('accounts.show', [], 'show_account_' . now()->timestamp ) --}}
-                {{-- @livewire('accounts.edit', [], 'edit_account_' . now()->timestamp ) --}}
-                {{-- @livewire('accounts.delete', [], 'delete_account_' . now()->timestamp ) --}}
+                @livewire('accounts.show', [], 'show_account_' . now()->timestamp )
+                @livewire('accounts.edit', [], 'edit_account_' . now()->timestamp )
+                @livewire('accounts.delete', [], 'delete_account_' . now()->timestamp )
 
 			</div>
 			<!-- Container closed -->

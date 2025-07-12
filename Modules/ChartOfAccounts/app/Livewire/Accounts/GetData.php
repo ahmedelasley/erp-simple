@@ -90,9 +90,9 @@ class GetData extends Component
     {
         $filters = [];
 
-        $data = $service->All($filters)->with(['children'])->whereNull('parent_id')
+        $data = $service->All($filters)->with(['children', 'journalEntryItems'])->whereNull('parent_id')
+        // ->withCount(['children', 'journalEntryItems']) // جلب عدد الأبناء تلقائيًا
         // ->get();
-        // ->withCount('children') // جلب عدد الأبناء تلقائيًا
         ->when($this->search, fn($q) => $q->where($this->searchField, 'like', '%' . $this->search . '%'))
         ->orderBy($this->sortField, $this->sortDirection)
         ->paginate($this->paginate);
