@@ -2,8 +2,9 @@
 
 namespace Modules\JournalEntries\Providers;
 
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -35,7 +36,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes(): void
     {
-        Route::middleware('web')->group(module_path($this->name, '/routes/web.php'));
+        Route::middleware(['web', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath'])
+            ->prefix(LaravelLocalization::setLocale())
+            ->group(module_path($this->name, '/routes/web.php'));
     }
 
     /**

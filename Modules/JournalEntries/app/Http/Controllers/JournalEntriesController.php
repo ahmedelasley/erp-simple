@@ -20,7 +20,7 @@ class JournalEntriesController extends Controller
      */
     public function create()
     {
-        return view('journalentries::create');
+        return view('journalentries::partials.create');
     }
 
     /**

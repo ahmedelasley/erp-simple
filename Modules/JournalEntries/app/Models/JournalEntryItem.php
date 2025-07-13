@@ -7,13 +7,10 @@ use Modules\JournalEntries\Models\JournalEntry;
 use Modules\ChartOfAccounts\Models\Account;
 use Modules\CostCenters\Models\CostCenter;
 
-
-
-
 class JournalEntryItem extends BaseModel
 {
     protected $table = 'journal_entry_items';
-    
+
     /**
      * The attributes that are mass assignable.
      */
@@ -51,5 +48,5 @@ class JournalEntryItem extends BaseModel
         return $this->belongsTo(CostCenter::class);
     }
 
-    
+
 }
