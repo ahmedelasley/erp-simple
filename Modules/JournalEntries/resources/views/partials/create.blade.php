@@ -18,20 +18,8 @@
 				<div class="row">
 
                     <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">{{ __('New Manual Journal Entry') }}</h3>
-                            </div>
-                            <div class="card-body">
-
-
-                            </div>
-                            <div class="card-footer">
-
-                            </div>
-                        </div>
+                        @livewire('journalentries.create')
                     </div>
-
 
                 </div>
 				<!-- row closed -->

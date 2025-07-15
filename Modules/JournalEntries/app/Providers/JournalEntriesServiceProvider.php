@@ -7,6 +7,8 @@ use Illuminate\Support\ServiceProvider;
 use Nwidart\Modules\Traits\PathNamespace;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use Livewire\Livewire;
+
 
 class JournalEntriesServiceProvider extends ServiceProvider
 {
@@ -27,6 +29,9 @@ class JournalEntriesServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->name, 'database/migrations'));
+
+        Livewire::component('journalentries.create', \Modules\JournalEntries\Livewire\JournalEntries\Partials\Create::class);
+
     }
 
     /**
