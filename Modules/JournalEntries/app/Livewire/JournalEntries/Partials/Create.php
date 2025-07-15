@@ -9,8 +9,10 @@ use Modules\JournalEntries\Http\Requests\JournalEntryStoreRequest;
 use Modules\JournalEntries\Interfaces\AccountServiceInterface;
 
 use Modules\Departments\Interfaces\DepartmentServiceInterface;
-
+use Modules\JournalEntries\Models\JournalEntry;
 use Modules\Positions\Interfaces\PositionServiceInterface;
+use Illuminate\Support\Facades\Auth;
+use Modules\JournalEntries\Services\JournalEntryService;
 
 class Create extends BaseComponent
 {
@@ -19,6 +21,8 @@ class Create extends BaseComponent
     public string $modal_id = 'create';
 
     public string $date;
+    public string $status = '';
+
     public ?string $reference_type = null;
     public ?string $reference_id = null;
     public ?string $description = null;
@@ -63,25 +67,55 @@ class Create extends BaseComponent
     }
 
 
-    // public function submit(JournalEntryServiceInterface $service): void
-    // {
-    //     $validated = $this->validate();
+    public function submit(JournalEntryService $service): void
+    {
+        $validated = $this->validate();
 
-    //     $service->create($validated);
+        // $entry = JournalEntry::create([
+        //     'entry_number' => 1,
+        //     'date' => $this->date,
+        //     // 'reference' => $this->reference,
+        //     'description' => $this->description,
+        //     'creator_type' => get_class(Auth::user()),
+        //     'creator_id' => Auth::id(),
+        // ]);
 
+        // foreach ($this->items as $item) {
+        //     $entry->items()->create([
+        //         'account_id' => $item['account_id'],
+        //         'debit' => $item['debit'],
+        //         'credit' => $item['credit'],
+        //         'description' => $item['description'],
+        //         'creator_type' => get_class(Auth::user()),
+        //         'creator_id' => Auth::id(),
+        //     ]);
+        // }
 
-    //     $this->reset();
+        $entry = $service->create($validated);
+
+        foreach ($this->items as $item) {
+            $entry->items()->create([
+                'account_id' => $item['account_id'],
+                'debit' => $item['debit'],
+                'credit' => $item['credit'],
+                'description' => $item['description'],
+                'creator_type' => get_class(Auth::user()),
+                'creator_id' => Auth::id(),
+            ]);
+        }
+
+        $this->reset();
 
     //     // Close the modal on the frontend
     //     $this->closeModal('create-account-modal');
 
     //     // Refresh the Account table
-    //     $this->dispatch('refreshData')->to(GetData::class);
+        $this->dispatch('refreshData')->to(GetData::class);
 
     //     // Show success alert
-    //     $this->successAlert();
+        $this->successAlert();
 
-    // }
+    }
 
 
     /**

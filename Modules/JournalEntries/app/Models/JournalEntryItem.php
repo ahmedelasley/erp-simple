@@ -14,7 +14,7 @@ class JournalEntryItem extends BaseModel
     /**
      * The attributes that are mass assignable.
      */
-    protected $fillable = ['journal_entry_id', 'account_id', 'cost_center_id', 'debit', 'credit', 'description'];
+    protected $fillable = ['journal_entry_id', 'account_id', 'cost_center_id', 'debit', 'credit', 'description', 'creator_type', 'creator_id'];
 
     /**
      * The attributes that should be cast to native types.
@@ -43,10 +43,10 @@ class JournalEntryItem extends BaseModel
     /**
      * Get the cost center associated with the journal entry item.
      */
-    public function costCenter() :BelongsTo
-    {
-        return $this->belongsTo(CostCenter::class);
-    }
+    // public function costCenter() :BelongsTo
+    // {
+    //     return $this->belongsTo(CostCenter::class);
+    // }
 
 
 }

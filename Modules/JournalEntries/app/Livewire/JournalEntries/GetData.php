@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\JournalEntries\Livewire\Accounts;
+namespace Modules\JournalEntries\Livewire\JournalEntries;
 
 use Livewire\Component;
 use Livewire\WithPagination;

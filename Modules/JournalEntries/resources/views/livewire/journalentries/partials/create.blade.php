@@ -15,19 +15,37 @@
                     labelText="{{ __('Date') }}"
                     placeholder="{{ __('Date') }}"
                     :isLivewire="true"
-                    divClass="col-md-3"
+                    divClass="col-md-2"
                     inputClass=""
                     otherAttributes="required autofocus"
                 />
+    <x-core::form.fields.select
+        name="status"
+        labelText="Journal Entry Status"
+        placeholder="Select a Status"
+        :isLivewire="true"
+        divClass="col-md-2"
+        labelClass=""
+        selectClass=""
+        otherAttributes=""
+    >
+            @forelse (\Modules\JournalEntries\Enums\JournalEntryStatus::options() as $value => $label)
+            <option value="{{ $value }}" wire:key="status-{{ $value }}" >{{ $label }}</option>
+        @empty
+            <option value="0" wire:key="status-none">None</option>
+        @endforelse
+    </x-core::form.fields.select>
 
-                <x-core::form.fields.textarea
-                    name="description"
-                    labelText="{{ __('Description') }}"
-                    placeholder="{{ __('Enter Description Here') }}..."
-                    rows="5"
-                    class="col-md-9"
-                />
-
+                                    <x-core::form.fields.input
+                                        type="text"
+                                        name="description"
+                                        labelText="{{ __('Description') }}"
+                                        placeholder="{{ __('Enter Description Here') }}"
+                                        :isLivewire="true"
+                                        divClass="col-md-8"
+                                        inputClass=""
+                                        otherAttributes=""
+                                    />
             </div>
 
             {{-- العناصر --}}

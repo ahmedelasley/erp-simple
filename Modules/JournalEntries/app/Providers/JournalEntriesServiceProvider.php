@@ -2,13 +2,20 @@
 
 namespace Modules\JournalEntries\Providers;
 
+use Livewire\Livewire;
+use RecursiveIteratorIterator;
+use RecursiveDirectoryIterator;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Nwidart\Modules\Traits\PathNamespace;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
-use Livewire\Livewire;
 
+use Modules\JournalEntries\Models\JournalEntry;
+use Modules\JournalEntries\Services\JournalEntryService;
+use Modules\JournalEntries\Observers\JournalEntryObserver;
+use Modules\JournalEntries\Repositories\JournalEntryRepository;
+use Modules\JournalEntries\Interfaces\JournalEntryServiceInterface;
+use Modules\JournalEntries\Interfaces\JournalEntryRepositoryInterface;
+use Modules\JournalEntries\Services\GenerateJournalEntryNumberService;
 
 class JournalEntriesServiceProvider extends ServiceProvider
 {
@@ -32,6 +39,9 @@ class JournalEntriesServiceProvider extends ServiceProvider
 
         Livewire::component('journalentries.create', \Modules\JournalEntries\Livewire\JournalEntries\Partials\Create::class);
 
+        // Register Observers
+        JournalEntry::observe(JournalEntryObserver::class);
+
     }
 
     /**
@@ -41,6 +51,10 @@ class JournalEntriesServiceProvider extends ServiceProvider
     {
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
+        $this->app->bind(JournalEntryRepositoryInterface::class, JournalEntryRepository::class);
+        $this->app->bind(JournalEntryServiceInterface::class, JournalEntryService::class);
+        $this->app->singleton(GenerateJournalEntryNumberService::class);
+
     }
 
     /**

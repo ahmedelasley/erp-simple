@@ -16,7 +16,7 @@ class JournalEntry extends BaseModel
     /**
      * The attributes that are mass assignable.
      */
-    protected $fillable = ['entry_number', 'date', 'description', 'reference_type', 'reference_id', 'status', 'fiscal_year_id'];
+    protected $fillable = ['entry_number', 'date', 'description', 'reference_type', 'reference_id', 'status', 'fiscal_year_id', 'creator_type', 'creator_id'];
 
     /**
      * The attributes that should be cast to native types.
@@ -29,7 +29,7 @@ class JournalEntry extends BaseModel
     /**
      * Get the reference model for the journal entry.
      * This allows polymorphic relations to other models.
-     */ 
+     */
     public function reference() :MorphTo
     {
         return $this->morphTo();
@@ -48,7 +48,7 @@ class JournalEntry extends BaseModel
     public function fiscalYear() : BelongsTo
     {
         return $this->belongsTo(FiscalYear::class);
-    }   
+    }
 
 
 }
