@@ -26,12 +26,14 @@ class JournalEntryUpdateRequest extends BaseUpdateRequest
             'reference_id' => ['nullable', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
             'status' => [new Enum(JournalEntryStatus::class)],
-            'fiscal_year_id' => 'nullable|integer|exists:fiscal_years,id',
+            // 'fiscal_year_id' => 'nullable|integer|exists:fiscal_years,id',
 
             'items' => ['required', 'array', 'min:2'],
             'items.*.account_id' => ['required', 'exists:accounts,id'],
             'items.*.debit' => ['nullable', 'numeric', 'min:0'],
             'items.*.credit' => ['nullable', 'numeric', 'min:0'],
+            'items.*.description' => ['nullable', 'string'],
+
             // 'items.*.cost_center_id' => ['nullable', 'exists:cost_centers,id'],
 
         ];
