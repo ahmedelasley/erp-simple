@@ -1,11 +1,20 @@
 @props([
     'name',
     'placeholder' => '',
+    'labelText' => __('Enter...'),
+    'labelClass' => '', // فئة التسمية الافتراضية لتنسيق متناسق
     'rows' => 3,
     'class' => '',
+    'isLabel' => true,
+
 ])
 
-<div class="mb-3">
+<div {{ $attributes->merge(['class' => 'form-group mb-3 ' . $class]) }}>
+    @if($isLabel)
+        <label for="{{ $name }}" {{ $attributes->merge(['class' => 'form-label main-content-label tx-12 tx-medium ' . $labelClass]) }}>
+            {{ __($labelText) }}
+        </label>
+    @endif
     <textarea
         name="{{ $name }}"
         id="{{ $attributes->get('id', $name) }}"
