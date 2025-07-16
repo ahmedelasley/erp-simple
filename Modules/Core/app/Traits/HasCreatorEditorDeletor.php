@@ -3,6 +3,7 @@
 namespace Modules\Core\Traits;
 
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Support\Facades\Schema;
 
 trait HasCreatorEditorDeletor
 {
@@ -16,8 +17,17 @@ trait HasCreatorEditorDeletor
         return $this->morphTo()->withDefault(['name' => __('Unknown')]);
     }
 
-    public function deletor(): MorphTo
+    public function deletor():?MorphTo
     {
-        return $this->morphTo()->withDefault(['name' => __('Unknown')]);
+        if ($this->hasDeletorColumn()) {
+            return $this->morphTo()->withDefault(['name' => __('Unknown')]);
+        }
+        return null;
+    }
+
+
+    public function hasDeletorColumn(): bool
+    {
+        return Schema::hasColumn($this->getTable(), 'deleted_at');
     }
 }

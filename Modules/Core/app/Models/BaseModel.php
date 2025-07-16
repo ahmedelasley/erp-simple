@@ -4,12 +4,12 @@ namespace Modules\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Core\Traits\HasCreatorEditorDeletor;
+use Modules\Core\Traits\ConditionalSoftDeletes;
 
 class BaseModel extends Model
 {
-    use HasFactory, HasCreatorEditorDeletor, SoftDeletes;
+    use HasFactory, HasCreatorEditorDeletor, ConditionalSoftDeletes;
 
     protected $guarded = [];
 
