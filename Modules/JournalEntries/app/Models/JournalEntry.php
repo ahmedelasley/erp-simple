@@ -16,7 +16,7 @@ class JournalEntry extends BaseModel
     /**
      * The attributes that are mass assignable.
      */
-    protected $fillable = ['entry_number', 'date', 'description', 'reference_type', 'reference_id', 'status', 'fiscal_year_id', 'creator_type', 'creator_id'];
+    protected $fillable = ['entry_number', 'date', 'description', 'reference_type', 'reference_id', 'status', 'fiscal_year_id','posted_at', 'creator_type', 'creator_id'];
 
     /**
      * The attributes that should be cast to native types.
@@ -24,6 +24,7 @@ class JournalEntry extends BaseModel
     protected $casts = [
         'status' => JournalEntryStatus::class,
         'date' => 'date',
+        'posted_at' => 'timestamp',
     ];
 
     /**
