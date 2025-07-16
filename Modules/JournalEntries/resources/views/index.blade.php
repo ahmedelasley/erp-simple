@@ -19,7 +19,7 @@
 @section('content')
 				<!-- row -->
 				<div class="row">
-                    {{-- @livewire('accounts.get-data') --}}
+                    @livewire('journalentries.get-data')
 				</div>
 				<!-- row closed -->
                 {{-- @livewire('accounts.show', [], 'show_account_' . now()->timestamp )

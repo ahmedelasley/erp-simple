@@ -6,13 +6,8 @@ use Modules\ChartOfAccounts\Services\AccountService;
 use Modules\Core\Livewire\BaseComponent;
 use Modules\JournalEntries\Livewire\JournalEntries\GetData;
 use Modules\JournalEntries\Http\Requests\JournalEntryStoreRequest;
-use Modules\JournalEntries\Interfaces\AccountServiceInterface;
-
-use Modules\Departments\Interfaces\DepartmentServiceInterface;
-use Modules\JournalEntries\Models\JournalEntry;
-use Modules\Positions\Interfaces\PositionServiceInterface;
 use Illuminate\Support\Facades\Auth;
-use Modules\JournalEntries\Services\JournalEntryService;
+use Modules\JournalEntries\Interfaces\JournalEntryServiceInterface;
 
 class Create extends BaseComponent
 {
@@ -29,6 +24,14 @@ class Create extends BaseComponent
 
     public array $items = [];
 
+    protected $listeners = [
+        'refreshData' => '$refresh',
+        // 'show_Account' => '$refresh',
+        // 'edit_Account' => '$refresh',
+        // 'toggle_status_Account' => '$refresh',
+        // 'delete_Account' => '$refresh',
+
+    ];
 
     public function mount()
     {
@@ -67,7 +70,7 @@ class Create extends BaseComponent
     }
 
 
-    public function submit(JournalEntryService $service): void
+    public function submit(JournalEntryServiceInterface $service): void
     {
         $validated = $this->validate();
 
@@ -93,8 +96,23 @@ class Create extends BaseComponent
 
         $entry = $service->create($validated);
 
+        // foreach ($this->items as $item) {
+        //     $entry->items()->create([
+        //         'account_id' => $item['account_id'],
+        //         'debit' => $item['debit'],
+        //         'credit' => $item['credit'],
+        //         'description' => $item['description'],
+        //         'creator_type' => get_class(Auth::user()),
+        //         'creator_id' => Auth::id(),
+        //     ]);
+        // }
+
+
+
+
         foreach ($this->items as $item) {
-            $entry->items()->create([
+
+           $entry->items()->create([
                 'account_id' => $item['account_id'],
                 'debit' => $item['debit'],
                 'credit' => $item['credit'],
@@ -103,6 +121,23 @@ class Create extends BaseComponent
                 'creator_id' => Auth::id(),
             ]);
         }
+            $debitTotal = collect($this->items)->sum('debit');
+            $creditTotal = collect($this->items)->sum('credit');
+
+            $roundingDifference = round($debitTotal - $creditTotal, 2);
+
+            if (abs($roundingDifference) >= 0.01) {
+            $roundingAccount = 2;
+            $entry->items()->create([
+                    'account_id' => $roundingAccount,
+                    'debit' => $roundingDifference < 0 ? abs($roundingDifference) : 0,
+                    'credit' => $roundingDifference > 0 ? $roundingDifference : 0,
+                    'description' => 'فرق تقريب تلقائي',
+                    'creator_type' => get_class(Auth::user()),
+                    'creator_id' => Auth::id(),
+                ]);
+
+            }
 
         $this->reset();
 
@@ -110,7 +145,10 @@ class Create extends BaseComponent
     //     $this->closeModal('create-account-modal');
 
     //     // Refresh the Account table
-        $this->dispatch('refreshData')->to(GetData::class);
+        // $this->dispatch('refreshData')->to(GetData::class);
+        $this->dispatch('refreshData')->self();
+
+        // return redirect()->route('journalentries.index');
 
     //     // Show success alert
         $this->successAlert();

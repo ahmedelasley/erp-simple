@@ -4,8 +4,7 @@ namespace Modules\JournalEntries\Livewire\JournalEntries;
 
 use Livewire\Component;
 use Livewire\WithPagination;
-use Modules\JournalEntries\Models\Account;
-use Modules\JournalEntries\Interfaces\AccountServiceInterface;
+use Modules\JournalEntries\Interfaces\JournalEntryServiceInterface;
 
 class GetData extends Component
 {
@@ -14,9 +13,9 @@ class GetData extends Component
     protected $paginationTheme = 'bootstrap';
 
     public string $search = '';
-    public string $searchField = 'code';
-    public string $sortField = 'code';
-    public string $sortDirection = 'asc';
+    public string $searchField = 'entry_number';
+    public string $sortField = 'entry_number';
+    public string $sortDirection = 'desc';
     public int $paginate = 10;
     public int $page = 1;
 
@@ -86,20 +85,20 @@ class GetData extends Component
         $this->searchField = 'code';
     }
 
-    public function render()
+    public function render(JournalEntryServiceInterface $service)
     {
-        // $filters = [];
+        $filters = [];
 
-        // $data = $service->All($filters)->with(['children', 'journalEntryItems'])->whereNull('parent_id')
-        // // ->withCount(['children', 'journalEntryItems']) // جلب عدد الأبناء تلقائيًا
-        // // ->get();
-        // ->when($this->search, fn($q) => $q->where($this->searchField, 'like', '%' . $this->search . '%'))
-        // ->orderBy($this->sortField, $this->sortDirection)
-        // ->paginate($this->paginate);
+        $data = $service->All($filters)
+        // ->with(['parent']) // جلب علاقة الأب مباشرة
+        // ->withCount('children') // جلب عدد الأبناء تلقائيًا
+        ->when($this->search, fn($q) => $q->where($this->searchField, 'like', '%' . $this->search . '%'))
+        ->orderBy($this->sortField, $this->sortDirection)
+        ->paginate($this->paginate);
 
 
         return view('journalentries::livewire.journalentries.get-data', [
-            // 'data' => $data,
+            'data' => $data,
         ]);
     }
 

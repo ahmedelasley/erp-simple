@@ -9,8 +9,7 @@
                 <x-core::form.fields.button-filter
                     :searchField="$searchField"
                     :items="[
-                        ['label' => 'Code', 'field' => 'code'],
-                        ['label' => 'Name', 'field' => 'name'],
+                        ['label' => 'Code', 'field' => 'entry_number'],
                     ]"
                 />
 
@@ -34,23 +33,47 @@
 
         </div>
         <div class="card-body">
-            <div class="table-responsive hoverable-table">
+            @php
+                $columns=[
+                    ['label' => 'ID'],
+                    ['label' => 'Code'],
+                    ['label' => 'Date'],
+                    ['label' => 'Description'],
+                    ['label' => 'Balance ( C / D )'],
+                    ['label' => 'No. Entry Lines'],
+                    ['label' => 'Status'],
+                    ['label' => 'Created At'],
+                ];
+            @endphp
+            <x-core::tables.dynamic-table :columns="$columns">
+            @forelse ($data as $value)
+                <tr>
+                    <th><b>{{ $data->firstItem()+$loop->index }}</b></th>
+                    <td><b>{{ $value->entry_number }}</b></td>
+                    <td><b>{{ $value->date }}</b></td>
+                    <td><b>{{ $value->description }}</b></td>
+                    <td><b>{{ $value->items->sum('debit') }}</b></td>
+                    <td><b>{{ $value->items->count() }}</b></td>
+                    <td><b><x-core::partials.badge :label="$value->status" /></b></td>
+                    <td><b><x-core::partials.date-format :date="$value->created_at" /></b></td>
 
-                <table class="table table-striped table-bordered table-hover text-md-wrap text-start">
-                    <tr class="bg-dark fs-14 text-bold text-white text-center">
-                        <th>{{ __('Account') }}</th>
-                        {{-- <th class="text-center">{{ __('Debit') }}</th>
-                        <th class="text-center">{{ __('Credit') }}</th> --}}
-                        <th class="text-center">{{ __('Balance') }}</th>
-                        <th class="text-center">{{ __('Action') }}</th>
-                    </tr>
-                    <tbody>
-                        @foreach ($data as $account)
-                            @include('chartofaccounts::livewire.accounts.partials.account-row', ['account' => $account, 'level' => 1, 'depth' => 0])
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                    <x-core::tables.partials.action-button
+                        :actions="[
+                            ['label' => __('Details'), 'event' => 'show_employee', 'id' => $value->id, 'icon' => 'bx bx-info-circle'],
+                            ['label' => __('Edit'), 'event' => 'edit_employee', 'id' => $value->id, 'icon' => 'bx bx-edit'],
+                            ['divider' => true],
+                            ['label' => __('Delete'), 'event' => 'delete_employee', 'id' => $value->id, 'icon' => 'bx bx-trash', 'class' => 'text-danger', 'confirm' => true],
+                        ]"
+                    />
+
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="{{ count($columns) + 1 }}" class="text-center text-muted">{{ __('No data found.') }}</td>
+                </tr>
+            @endforelse
+            </x-core::tables.dynamic-table>
+
         </div>
         <div class="card-footer">
             <div class="d-flex flex-row justify-content-end">

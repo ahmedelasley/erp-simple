@@ -16,6 +16,7 @@ use Modules\JournalEntries\Repositories\JournalEntryRepository;
 use Modules\JournalEntries\Interfaces\JournalEntryServiceInterface;
 use Modules\JournalEntries\Interfaces\JournalEntryRepositoryInterface;
 use Modules\JournalEntries\Services\GenerateJournalEntryNumberService;
+use Modules\JournalEntries\Services\AddRoundingDifferenceService;
 
 class JournalEntriesServiceProvider extends ServiceProvider
 {
@@ -37,6 +38,7 @@ class JournalEntriesServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->name, 'database/migrations'));
 
+        Livewire::component('journalentries.get-data', \Modules\JournalEntries\Livewire\JournalEntries\GetData::class);
         Livewire::component('journalentries.create', \Modules\JournalEntries\Livewire\JournalEntries\Partials\Create::class);
 
         // Register Observers
@@ -54,6 +56,7 @@ class JournalEntriesServiceProvider extends ServiceProvider
         $this->app->bind(JournalEntryRepositoryInterface::class, JournalEntryRepository::class);
         $this->app->bind(JournalEntryServiceInterface::class, JournalEntryService::class);
         $this->app->singleton(GenerateJournalEntryNumberService::class);
+        $this->app->singleton(AddRoundingDifferenceService::class);
 
     }
 
