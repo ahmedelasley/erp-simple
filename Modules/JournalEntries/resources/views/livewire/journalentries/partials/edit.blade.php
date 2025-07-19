@@ -1,13 +1,8 @@
 <!-- Start Create Form -->
-<div class="card">
-    <form id="form">
-        <div class="card-header">
-            <h3 class="card-title">{{ __('New Manual Journal Entry') }}</h3>
-        </div>
-        <div class="card-body">
 
-            {{-- التاريخ والمرجع والوصف --}}
-            <div class="row">
+<form id="form" class="row">
+
+               {{-- التاريخ والمرجع والوصف --}}
 
                 <x-core::form.fields.input
                     type="date"
@@ -46,7 +41,6 @@
                     inputClass=""
                     otherAttributes=""
                 />
-            </div>
 
             {{-- العناصر --}}
             <div class="table-responsive">
@@ -56,6 +50,7 @@
                 <table class="table table-bordered text-center">
                     <thead class="bg-primary text-white">
                         <tr>
+                            <th>{{ __('#') }}</th>
                             <th>{{ __('Account') }}</th>
                             <th>{{ __('Debit') }}</th>
                             <th>{{ __('Credit') }}</th>
@@ -66,6 +61,7 @@
                     <tbody>
                         @foreach ($items as $index => $item)
                             <tr wire:key="item-{{ $index }}">
+                                <td>{{ $index+1 }}</td>
                                 <td>
 
                                     <x-core::form.fields.select
@@ -79,7 +75,7 @@
                                         selectClass="select2"
                                         otherAttributes=""
                                     >
-                                        @forelse ($dataAccounts as $value)
+                                        @forelse ($data as $value)
                                             {{-- <option value="{{ $value->id }}" wire:key="type-{{ $value->id }}" >{{ $value->code }} - {{ $value->name }}</option> --}}
                                             @include('journalentries::livewire.journalentries.partials.option-account', ['value' => $value, 'depth' => 0])
 
@@ -147,16 +143,8 @@
                     </tbody>
                 </table>
             </div>
-        </div>
-        {{-- </div> --}}
-        <div class="card-footer">
-            <x-core::form.fields.button-submit  clickBtn="submit()" target="submit" />
-
-        </div>
-    </form>
-</div>
-
-
+    
+</form>
 
 <!-- End Create Form -->
 

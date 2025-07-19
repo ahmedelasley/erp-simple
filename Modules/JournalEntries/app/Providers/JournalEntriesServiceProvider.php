@@ -15,8 +15,13 @@ use Modules\JournalEntries\Observers\JournalEntryObserver;
 use Modules\JournalEntries\Repositories\JournalEntryRepository;
 use Modules\JournalEntries\Interfaces\JournalEntryServiceInterface;
 use Modules\JournalEntries\Interfaces\JournalEntryRepositoryInterface;
+
 use Modules\JournalEntries\Services\GenerateJournalEntryNumberService;
 use Modules\JournalEntries\Services\AddRoundingDifferenceService;
+
+use Modules\JournalEntries\Models\JournalEntryItem;
+use Modules\JournalEntries\Observers\JournalEntryItemObserver;
+
 
 class JournalEntriesServiceProvider extends ServiceProvider
 {
@@ -40,9 +45,14 @@ class JournalEntriesServiceProvider extends ServiceProvider
 
         Livewire::component('journalentries.get-data', \Modules\JournalEntries\Livewire\JournalEntries\GetData::class);
         Livewire::component('journalentries.create', \Modules\JournalEntries\Livewire\JournalEntries\Partials\Create::class);
+        Livewire::component('journalentries.show', \Modules\JournalEntries\Livewire\JournalEntries\Partials\Show::class);
+        Livewire::component('journalentries.edit', \Modules\JournalEntries\Livewire\JournalEntries\Partials\Edit::class);
+        Livewire::component('journalentries.delete', \Modules\JournalEntries\Livewire\JournalEntries\Partials\Delete::class);
+        Livewire::component('journalentries.create-modal', \Modules\JournalEntries\Livewire\JournalEntries\Partials\CreateModal::class);
 
         // Register Observers
         JournalEntry::observe(JournalEntryObserver::class);
+        JournalEntryItem::observe(JournalEntryItemObserver::class);
 
     }
 
@@ -53,8 +63,10 @@ class JournalEntriesServiceProvider extends ServiceProvider
     {
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
+        
         $this->app->bind(JournalEntryRepositoryInterface::class, JournalEntryRepository::class);
         $this->app->bind(JournalEntryServiceInterface::class, JournalEntryService::class);
+
         $this->app->singleton(GenerateJournalEntryNumberService::class);
         $this->app->singleton(AddRoundingDifferenceService::class);
 

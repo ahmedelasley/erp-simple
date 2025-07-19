@@ -22,10 +22,10 @@ class GetData extends Component
 
     protected $listeners = [
         'refreshData' => 'refreshComponent',
-        'show_Account' => '$refresh',
-        'edit_Account' => '$refresh',
-        // 'toggle_status_Account' => '$refresh',
-        'delete_Account' => '$refresh',
+        'show_journal_entry' => '$refresh',
+        'edit_journal_entry' => '$refresh',
+        // 'toggle_status_journal_entry' => '$refresh',
+        'delete_journal_entry' => '$refresh',
 
     ];
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\CharJournalEntriestOfAccounts\Http\Requests;
+namespace Modules\JournalEntries\Http\Requests;
 use Illuminate\Validation\Rules\Enum;
 use Modules\Core\Http\Requests\BaseUpdateRequest;
 use \Modules\JournalEntries\Enums\JournalEntryStatus;

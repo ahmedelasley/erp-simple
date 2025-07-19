@@ -39,7 +39,7 @@
                     ['label' => 'Code'],
                     ['label' => 'Date'],
                     ['label' => 'Description'],
-                    ['label' => 'Balance ( C / D )'],
+                    ['label' => 'Balance ( Ddebit | Credit )'],
                     ['label' => 'No. Entry Lines'],
                     ['label' => 'Status'],
                     ['label' => 'Created At'],
@@ -51,18 +51,18 @@
                     <th><b>{{ $data->firstItem()+$loop->index }}</b></th>
                     <td><b>{{ $value->entry_number }}</b></td>
                     <td><b>{{ $value->date }}</b></td>
-                    <td><b>{{ $value->description }}</b></td>
-                    <td><b>{{ $value->items->sum('debit') }}</b></td>
+                    <td><b class="text-wrap">{{ $value->description }}</b></td>
+                    <td><x-core::partials.badge :label="$value->items->sum('debit')" color="success" /><x-core::partials.badge :label="$value->items->sum('credit')" color="danger"/></td>
                     <td><b>{{ $value->items->count() }}</b></td>
                     <td><b><x-core::partials.badge :label="$value->status" /></b></td>
                     <td><b><x-core::partials.date-format :date="$value->created_at" /></b></td>
 
                     <x-core::tables.partials.action-button
                         :actions="[
-                            ['label' => __('Details'), 'event' => 'show_employee', 'id' => $value->id, 'icon' => 'bx bx-info-circle'],
-                            ['label' => __('Edit'), 'event' => 'edit_employee', 'id' => $value->id, 'icon' => 'bx bx-edit'],
+                            ['label' => __('Details'), 'event' => 'show_journal_entry', 'id' => $value->id, 'icon' => 'bx bx-info-circle'],
+                            ['label' => __('Edit'), 'event' => 'edit_journal_entry', 'id' => $value->id, 'icon' => 'bx bx-edit'],
                             ['divider' => true],
-                            ['label' => __('Delete'), 'event' => 'delete_employee', 'id' => $value->id, 'icon' => 'bx bx-trash', 'class' => 'text-danger', 'confirm' => true],
+                            ['label' => __('Delete'), 'event' => 'delete_journal_entry', 'id' => $value->id, 'icon' => 'bx bx-trash', 'class' => 'text-danger', 'confirm' => true],
                         ]"
                     />
 

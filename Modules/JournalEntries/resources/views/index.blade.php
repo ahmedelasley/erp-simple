@@ -11,9 +11,9 @@
 @endsection
 @section('side-header')
     <div class="pr-1 mb-3 mb-xl-0">
-        {{-- <button type="button" class="btn btn-primary btn-sm ml-2" data-toggle="modal" data-target="#createModal" data-placement="top" data-toggle="tooltip" title=" {{ __('Add', ['type' => __('attribute')]) }}"><b><i class="mdi mdi-plus"></i> {{ __('Add', ['type' => __('attribute')]) }}</b></button> --}}
-        <a href="{{ route('journalentries.create') }}" class="btn btn-primary btn-sm ml-2" data-toggle="tooltip" title="{{ __('New Manual Journal Entry') }}"><b><i class="mdi mdi-plus"></i> {{ __('New Manual Journal Entry') }}</b></a>
-        {{-- @livewire('accounts.create') --}}
+        <button type="button" class="btn btn-primary btn-sm ml-2" data-toggle="modal" data-target="#createModal" data-placement="top" data-toggle="tooltip" title=" {{ __('New', ['type' => __('Manual Journal Entry')]) }}"><b><i class="mdi mdi-plus tx-bold"></i> {{ __('New', ['type' => __('Manual Journal Entry')]) }}</b></button>
+        @livewire('journalentries.create-modal')
+        {{-- <a href="{{ route('journalentries.create') }}" class="btn btn-primary btn-sm ml-2" data-toggle="tooltip" title="{{ __('New Manual Journal Entry') }}"><b><i class="mdi mdi-plus"></i> {{ __('New Manual Journal Entry') }}</b></a> --}}
     </div>
 @endsection
 @section('content')
@@ -22,9 +22,9 @@
                     @livewire('journalentries.get-data')
 				</div>
 				<!-- row closed -->
-                {{-- @livewire('accounts.show', [], 'show_account_' . now()->timestamp )
-                @livewire('accounts.edit', [], 'edit_account_' . now()->timestamp )
-                @livewire('accounts.delete', [], 'delete_account_' . now()->timestamp ) --}}
+                @livewire('journalentries.show', [], 'show_journal_entry_' . now()->timestamp )
+                @livewire('journalentries.edit', [], 'edit_journal_entry_' . now()->timestamp )
+                @livewire('journalentries.delete', [], 'delete_journal_entry_' . now()->timestamp )
 
 			</div>
 			<!-- Container closed -->
@@ -33,19 +33,19 @@
 @endsection
 @section('js')
     <script>
-        window.addEventListener('create-account-modal', event => {
+        window.addEventListener('create-journal-entry-modal', event => {
             $('#createModal').modal('toggle');
         })
-        window.addEventListener('show-account-modal', event => {
+        window.addEventListener('show-journal-entry-modal', event => {
             $('#showModal').modal('toggle');
         })
-        window.addEventListener('edit-account-modal', event => {
+        window.addEventListener('edit-journal-entry-modal', event => {
             $('#editModal').modal('toggle');
         })
-        // window.addEventListener('toggle-status-account-modal', event => {
+        // window.addEventListener('toggle-status-journal-entry-modal', event => {
         //     $('#statusModal').modal('toggle');
         // })
-        window.addEventListener('delete-account-modal', event => {
+        window.addEventListener('delete-journal-entry-modal', event => {
             $('#deleteModal').modal('toggle');
         })
     </script>
