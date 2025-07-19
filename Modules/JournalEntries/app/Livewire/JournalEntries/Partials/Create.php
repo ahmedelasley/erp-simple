@@ -2,15 +2,17 @@
 
 namespace Modules\JournalEntries\Livewire\JournalEntries\Partials;
 
-use Modules\ChartOfAccounts\Services\AccountService;
+use Illuminate\Support\Facades\Auth;
 use Modules\Core\Livewire\BaseComponent;
+use Modules\Core\Traits\HandlesRoundingDifference;
+use Modules\ChartOfAccounts\Services\AccountService;
 use Modules\JournalEntries\Livewire\JournalEntries\GetData;
 use Modules\JournalEntries\Http\Requests\JournalEntryStoreRequest;
-use Illuminate\Support\Facades\Auth;
 use Modules\JournalEntries\Interfaces\JournalEntryServiceInterface;
 
 class Create extends BaseComponent
 {
+    use HandlesRoundingDifference;
     public string $titleModal = 'Create';
     public string $subTitleModal = 'Journal Entry';
     public string $modal_id = 'create';
@@ -37,14 +39,14 @@ class Create extends BaseComponent
     {
         $this->date = now()->format('Y-m-d');
         $this->items = [
-            ['account_id' => null, 'debit' => 0, 'credit' => 0, 'cost_center_id' => null],
-            ['account_id' => null, 'debit' => 0, 'credit' => 0, 'cost_center_id' => null],
+            ['account_id' => null, 'debit' => 0, 'credit' => 0, 'description' => null, 'cost_center_id' => null],
+            ['account_id' => null, 'debit' => 0, 'credit' => 0, 'description' => null, 'cost_center_id' => null],
         ];
     }
 
     public function addRow()
     {
-        $this->items[] = ['account_id' => null, 'debit' => 0, 'credit' => 0, 'cost_center_id' => null];
+        $this->items[] = ['account_id' => null, 'debit' => 0, 'credit' => 0, 'description' => null, 'cost_center_id' => null];
     }
 
     public function removeRow($index)
@@ -74,42 +76,9 @@ class Create extends BaseComponent
     {
         $validated = $this->validate();
 
-        // $entry = JournalEntry::create([
-        //     'entry_number' => 1,
-        //     'date' => $this->date,
-        //     // 'reference' => $this->reference,
-        //     'description' => $this->description,
-        //     'creator_type' => get_class(Auth::user()),
-        //     'creator_id' => Auth::id(),
-        // ]);
-
-        // foreach ($this->items as $item) {
-        //     $entry->items()->create([
-        //         'account_id' => $item['account_id'],
-        //         'debit' => $item['debit'],
-        //         'credit' => $item['credit'],
-        //         'description' => $item['description'],
-        //         'creator_type' => get_class(Auth::user()),
-        //         'creator_id' => Auth::id(),
-        //     ]);
-        // }
-
         $entry = $service->create($validated);
 
-        // foreach ($this->items as $item) {
-        //     $entry->items()->create([
-        //         'account_id' => $item['account_id'],
-        //         'debit' => $item['debit'],
-        //         'credit' => $item['credit'],
-        //         'description' => $item['description'],
-        //         'creator_type' => get_class(Auth::user()),
-        //         'creator_id' => Auth::id(),
-        //     ]);
-        // }
-
-
-
-
+        // $entry->items->create($this->items);
         foreach ($this->items as $item) {
 
            $entry->items()->create([
@@ -121,23 +90,8 @@ class Create extends BaseComponent
                 'creator_id' => Auth::id(),
             ]);
         }
-            $debitTotal = collect($this->items)->sum('debit');
-            $creditTotal = collect($this->items)->sum('credit');
+        $this->handlesRoundingDifference($entry);
 
-            $roundingDifference = round($debitTotal - $creditTotal, 2);
-
-            if (abs($roundingDifference) >= 0.01) {
-            $roundingAccount = 2;
-            $entry->items()->create([
-                    'account_id' => $roundingAccount,
-                    'debit' => $roundingDifference < 0 ? abs($roundingDifference) : 0,
-                    'credit' => $roundingDifference > 0 ? $roundingDifference : 0,
-                    'description' => 'فرق تقريب تلقائي',
-                    'creator_type' => get_class(Auth::user()),
-                    'creator_id' => Auth::id(),
-                ]);
-
-            }
 
         $this->reset();
 

@@ -2,7 +2,7 @@
 @php
     // $balance = $account->getRecursiveBalance();
     $indent = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $level);
-    
+
 @endphp
 <tr class="tx-bold tx-16">
     <td class="text-start" style="padding-left: {{ $level * 35 }}px;font-weight:bold;">
@@ -19,7 +19,7 @@
         ];
 
         if ($account->children->isEmpty() && $account->journalEntryItems->isEmpty()) {
-            
+
             $buttons[] = ['divider' => true];
             $buttons[] = [
                 'label' => __('Delete'),
