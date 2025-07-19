@@ -24,7 +24,7 @@ class JournalEntryObserver extends BaseObserver
 
     protected function onDeleting($journalEntry)
     {
-        if ($journalEntry->children()->exists()) {
+        if ($journalEntry->items()->exists()) {
             throw new \Exception(__('Cannot delete a JournalEntry with sub-JournalEntries.'));
         }
     }

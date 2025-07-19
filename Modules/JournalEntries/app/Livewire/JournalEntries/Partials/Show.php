@@ -3,9 +3,9 @@
 namespace Modules\JournalEntries\Livewire\JournalEntries\Partials;
 
 use Modules\Core\Livewire\BaseComponent;
-use Modules\ChartOfAccounts\Livewire\Accounts\GetData;
-use Modules\ChartOfAccounts\Interfaces\AccountServiceInterface;
-use Modules\ChartOfAccounts\Models\Account;
+use Modules\JournalEntries\Livewire\JournalEntries\GetData;
+use Modules\JournalEntries\Interfaces\JournalEntryServiceInterface;
+use Modules\JournalEntries\Models\JournalEntry;
 
 class Show extends BaseComponent
 {
@@ -30,11 +30,11 @@ class Show extends BaseComponent
     public ?int $parent_id = null;
     public $children = null;
 
-    protected $listeners = ['show_account'];
+    protected $listeners = ['show_journal_entry'];
 
-    public function show_account($id)
+    public function show_journal_entry($id)
     {
-        $this->model = Account::findOrFail($id);
+        $this->model = JournalEntry::findOrFail($id);
 
         // dd($this->model);
         if (!$this->model) {
@@ -48,7 +48,7 @@ class Show extends BaseComponent
         // $this->name = $this->model->name;
         // $this->description = $this->model->description;
         // $this->parent_id = $this->model->parent_id;
-        $this->children = $this->model?->children;
+        // $this->children = $this->model?->children;
 
         // Reset validation and errors
         $this->resetValidation();
@@ -67,20 +67,16 @@ class Show extends BaseComponent
         $this->reset();
         $this->resetValidation();
         $this->resetErrorBag();
-        $this->mount();
         // $this->closeModal('create-journal-entry-modal');
         $this->dispatch('refreshData')->to(GetData::class);
     }
 
-    public function render(AccountServiceInterface $service)
+    public function render(JournalEntryServiceInterface $service)
     {
 
         $filters = [];
 
-        $data = $service->All($filters)
-        ->with(['children', 'journalEntryItems'])->whereNull('parent_id')
-        // ->withCount('children')
-        ->get();
+        $data = $service->All($filters)->with(['items'])->withCount('items')->get();
 
         return view('journalentries::livewire.journalentries.partials.form', [
             'data' => $data,

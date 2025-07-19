@@ -57,15 +57,38 @@
                     <td><b><x-core::partials.badge :label="$value->status" /></b></td>
                     <td><b><x-core::partials.date-format :date="$value->created_at" /></b></td>
 
-                    <x-core::tables.partials.action-button
+                    {{-- <x-core::tables.partials.action-button
                         :actions="[
                             ['label' => __('Details'), 'event' => 'show_journal_entry', 'id' => $value->id, 'icon' => 'bx bx-info-circle'],
                             ['label' => __('Edit'), 'event' => 'edit_journal_entry', 'id' => $value->id, 'icon' => 'bx bx-edit'],
                             ['divider' => true],
                             ['label' => __('Delete'), 'event' => 'delete_journal_entry', 'id' => $value->id, 'icon' => 'bx bx-trash', 'class' => 'text-danger', 'confirm' => true],
                         ]"
-                    />
 
+                    /> --}}
+                    @php
+                        $buttons=[
+                            ['label' => __('Details'), 'event' => 'show_journal_entry', 'id' => $value->id, 'icon' => 'bx bx-info-circle'],
+                            ['label' => __('Edit'), 'event' => 'edit_journal_entry', 'id' => $value->id, 'icon' => 'bx bx-edit'],
+                        ];
+
+                        // if ($value->status->value !== \Modules\JournalEntries\Enums\JournalEntryStatus::POSTED->value && $value->items->isEmpty()) {
+                        if ($value->status->value !== \Modules\JournalEntries\Enums\JournalEntryStatus::POSTED->value) {
+
+                            $buttons[] = ['divider' => true];
+                            $buttons[] = [
+                                'label' => __('Delete'),
+                                'event' => 'delete_journal_entry',
+                                'id' => $value->id,
+                                'icon' => 'bx bx-trash',
+                                'class' => 'text-danger',
+                                'confirm' => true,
+                            ];
+                        }
+                    @endphp
+                    <x-core::tables.partials.action-button
+                        :actions="$buttons"
+                    />
                 </tr>
             @empty
                 <tr>

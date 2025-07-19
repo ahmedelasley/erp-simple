@@ -11,9 +11,6 @@ use Modules\JournalEntries\Models\JournalEntry;
 class Delete extends BaseComponent
 {
 
-
-
-
     /** @var JournalEntry|null */
     public $model = null;
 
@@ -53,6 +50,9 @@ class Delete extends BaseComponent
 
     public function submit(JournalEntryServiceInterface $service): void
     {
+
+
+        $this->model->items()->delete();
         $service->delete($this->model);
 
         $this->close();
@@ -77,7 +77,6 @@ class Delete extends BaseComponent
         $this->reset();
         $this->resetValidation();
         $this->resetErrorBag();
-        $this->mount();
         // $this->closeModal('create-journal-entry-modal');
         $this->dispatch('refreshData')->to(GetData::class);
     }

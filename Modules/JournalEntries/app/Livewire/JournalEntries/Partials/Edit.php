@@ -3,14 +3,16 @@
 namespace Modules\JournalEntries\Livewire\JournalEntries\Partials;
 
 use Modules\Core\Livewire\BaseComponent;
-use Modules\JournalEntries\Livewire\JournalEntries\GetData;
-use Modules\JournalEntries\Http\Requests\JournalEntryUpdateRequest;
 use Modules\JournalEntries\Models\JournalEntry;
-use Modules\JournalEntries\Interfaces\JournalEntryServiceInterface;
+use Modules\Core\Traits\HandlesRoundingDifference;
+use Modules\JournalEntries\Livewire\JournalEntries\GetData;
 use Modules\ChartOfAccounts\Interfaces\AccountServiceInterface;
+use Modules\JournalEntries\Http\Requests\JournalEntryUpdateRequest;
+use Modules\JournalEntries\Interfaces\JournalEntryServiceInterface;
 
 class Edit extends BaseComponent
 {
+    use HandlesRoundingDifference;
 
     /** @var JournalEntry|null */
     public $model = null;
@@ -27,10 +29,7 @@ class Edit extends BaseComponent
     public string $target = 'submit';
 
 
-
-
     public ?int $id = null;
-
     public string $date;
     public string $status = '';
 
@@ -56,7 +55,7 @@ class Edit extends BaseComponent
 
         // Set the properties
         $this->id = $this->model->id;
-        $this->date = $this->model->date;
+        $this->date = $this->model->date->format('Y-m-d');
         $this->description = $this->model->description;
         $this->status = $this->model->status->value;
 
@@ -101,7 +100,7 @@ class Edit extends BaseComponent
     {
         $validated = $this->validate();
 
-        $service->items->forceDelete();
+        $this->model->items()->delete();
 
          $entry = $service->update($this->model, $validated);
 
@@ -141,7 +140,6 @@ class Edit extends BaseComponent
         $this->reset();
         $this->resetValidation();
         $this->resetErrorBag();
-        $this->mount();
         // $this->closeModal('create-journal-entry-modal');
         $this->dispatch('refreshData')->to(GetData::class);
     }
