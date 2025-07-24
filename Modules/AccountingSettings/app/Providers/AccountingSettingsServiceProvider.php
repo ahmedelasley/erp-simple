@@ -2,11 +2,18 @@
 
 namespace Modules\AccountingSettings\Providers;
 
+use Livewire\Livewire;
+use RecursiveIteratorIterator;
+use RecursiveDirectoryIterator;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Nwidart\Modules\Traits\PathNamespace;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
+use Modules\AccountingSettings\Models\AccountingSetting;
+use Modules\AccountingSettings\Services\AccountingSettingService;
+use Modules\AccountingSettings\Observers\AccountingSettingObserver;
+use Modules\AccountingSettings\Repositories\AccountingSettingRepository;
+use Modules\AccountingSettings\Interfaces\AccountingSettingServiceInterface;
+use Modules\AccountingSettings\Interfaces\AccountingSettingRepositoryInterface;
 
 class AccountingSettingsServiceProvider extends ServiceProvider
 {
@@ -27,6 +34,16 @@ class AccountingSettingsServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->name, 'database/migrations'));
+
+        Livewire::component('accountingsettings.get-data', \Modules\AccountingSettings\Livewire\AccountingSettings\GetData::class);
+        // Livewire::component('accountingsettings.create', \Modules\AccountingSettings\Livewire\AccountingSettings\Partials\Create::class);
+        // Livewire::component('accountingsettings.show', \Modules\AccountingSettings\Livewire\AccountingSettings\Partials\Show::class);
+        Livewire::component('accountingsettings.edit', \Modules\AccountingSettings\Livewire\AccountingSettings\Partials\Edit::class);
+        // Livewire::component('accountingsettings.delete', \Modules\AccountingSettings\Livewire\AccountingSettings\Partials\Delete::class);
+
+        // Register Observers
+        AccountingSetting::observe(AccountingSettingObserver::class);
+
     }
 
     /**
@@ -36,6 +53,11 @@ class AccountingSettingsServiceProvider extends ServiceProvider
     {
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
+
+        $this->app->bind(AccountingSettingRepositoryInterface::class, AccountingSettingRepository::class);
+        $this->app->bind(AccountingSettingServiceInterface::class, AccountingSettingService::class);
+
+
     }
 
     /**
