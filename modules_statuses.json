@@ -13,5 +13,6 @@
     "Vouchers": true,
     "FiscalYears": true,
     "AccountTypes": true,
-    "AccountingSettings": true
+    "AccountingSettings": true,
+    "Settings": true
 }

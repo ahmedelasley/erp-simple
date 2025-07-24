@@ -31,6 +31,10 @@
             @module('Accounting')
                 @include('accounting::layouts.partials.slide')
             @endmodule
+
+            @module('Settings')
+                @include('settings::layouts.partials.slide')
+            @endmodule
         </ul>
     </div>
 </aside>
