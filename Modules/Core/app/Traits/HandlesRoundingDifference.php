@@ -17,7 +17,7 @@ trait HandlesRoundingDifference
             $roundingDifference = round($debitTotal - $creditTotal, 2);
 
             if (abs($roundingDifference) >= 0.01) {
-            $roundingAccount = 2;
+            $roundingAccount = (int) (accounting_setting('rounding_account_id'));
             $entry->items()->create([
                     'account_id' => $roundingAccount,
                     'debit' => $roundingDifference < 0 ? abs($roundingDifference) : 0,
