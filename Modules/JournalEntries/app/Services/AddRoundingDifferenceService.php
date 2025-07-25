@@ -9,13 +9,9 @@ class AddRoundingDifferenceService
 {
     public function handle($journalEntry): void
     {
-
-
-
-
         // 1. التحقق من تفعيل فرق التقريب
-        // $autoAdd = Setting::get('auto_add_rounding', false);
-        $autoAdd = true;
+        $autoAdd = accounting_setting('auto_add_rounding');
+        // $autoAdd = true;
 
         if (! $autoAdd) {
             return;
@@ -29,8 +25,8 @@ class AddRoundingDifferenceService
 
         if (abs($difference) >= 0.01) {
             // 3. جلب حساب فرق التقريب
-        // $roundingAccountId = Setting::get('rounding_account_id');
-        $roundingAccountId = 2;
+        $roundingAccountId = accounting_setting('rounding_account_id');
+        // $roundingAccountId = 2;
             if (! $roundingAccountId) {
                 logger()->warning('Rounding account not set in settings.');
                 return;
