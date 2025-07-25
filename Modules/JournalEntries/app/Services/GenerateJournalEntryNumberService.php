@@ -6,8 +6,8 @@ use Modules\JournalEntries\Models\JournalEntry;
 
 class GenerateJournalEntryNumberService
 {
-    protected string $prefix = 'JE-';
-    protected int $padLength = 6;
+    protected string $prefix =  accounting_setting('journal_entry_prefix');
+    protected int $padLength = accounting_setting('journal_entry_code_length');
 
     public function generate(): string
     {
