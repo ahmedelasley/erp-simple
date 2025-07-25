@@ -21,6 +21,8 @@ class AccountingSetting extends BaseModel
      * The attributes that should be cast to native types.
      */
     protected $casts = [
+        'value' => 'json',
+        'default_value' => 'json',
         'data_type' => AccountingSettingDataType::class,
         'type' => AccountingSettingType::class,
     ];
