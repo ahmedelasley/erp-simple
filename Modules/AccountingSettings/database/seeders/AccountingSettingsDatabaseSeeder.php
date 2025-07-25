@@ -165,6 +165,14 @@ class AccountingSettingsDatabaseSeeder extends Seeder
                 'data_type'     => AccountingSettingDataType::BOOLEAN,
             ],
             [
+                'key'           => 'auto_add_rounding',
+                'value'         => TRUE,
+                'default_value' => TRUE,
+                'description'   => '',
+                'type'          => AccountingSettingType::JOURNAL_ENTRIES,
+                'data_type'     => AccountingSettingDataType::BOOLEAN,
+            ],
+            [
                 'key'           => 'prevent_posting_closed_year',
                 'value'         => TRUE,
                 'default_value' => TRUE,
@@ -229,8 +237,8 @@ class AccountingSettingsDatabaseSeeder extends Seeder
             AccountingSetting::updateOrCreate(
                 ['key' => $setting['key']],
                 [
-                    'value' => json_encode($setting['value']),
-                    'default_value' => json_encode($setting['default_value']),
+                    'value' => $setting['value'],
+                    'default_value' => $setting['default_value'],
                     'description'   => $setting['description'],
                     'icon'          => $setting['icon'] ?? null,
                     'type'          => $setting['type'],
