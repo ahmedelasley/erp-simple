@@ -20,7 +20,10 @@
             "Modules\\AccountingSettings\\": "app/",
             "Modules\\AccountingSettings\\Database\\Factories\\": "database/factories/",
             "Modules\\AccountingSettings\\Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/Helpers/AccountingHelper.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
