@@ -7,16 +7,14 @@ enum AccountingSettingType : string
 {
     use HasBaseEnumFeatures;
 
-    case GENERAL = 'general';
-    case SYSTEM = 'system';
-    case USER = 'user';
-    case ROLE = 'role';
-    case PERMISSION = 'permission';
-    case MODULE = 'module';
-    case APPEARANCE = 'appearance';
-    case LANGUAGE = 'language & Region';
-    case NOTIFICATION = 'notification';
     case CUSTOM = 'custom';
+    case ACCOUNTS = 'accounts';
+    case JOURNAL_ENTRIES = 'journal_entries';
+    case VOUCHERS = 'vouchers';
+    case CURRENCIES = 'currencies';
+    case TAXES = 'taxes';
+    case FISCAL_YEARS = 'fiscal_years';
+    case COST_CENTERES = 'cost_centeres';
 
 
 }
