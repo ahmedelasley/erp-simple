@@ -25,11 +25,11 @@ class GenerateAccountCodeService
             $parentCode = $parent->code;
             // $parentLevel = $parent->level ?? 1; // Assume default level 1 if missing
             // $currentLevel = $parentLevel + 1;
-$parentLevel = $parent->level instanceof \BackedEnum
-    ? $parent->level->value
-    : (int) $parent->level;
+            $parentLevel = $parent->level instanceof \BackedEnum
+                ? $parent->level->value
+                : (int) $parent->level;
 
-$currentLevel = $parentLevel + 1;
+            $currentLevel = $parentLevel + 1;
 
             $segmentLength = static::$levelLengths[$currentLevel] ?? 2; // default fallback
 
