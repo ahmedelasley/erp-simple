@@ -5,7 +5,7 @@
     <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">{{ __('Settings') }}</a></li>
     <li class="breadcrumb-item active" aria-current="page">
         <select name="" id="" class="nice-select custom-select select2" style="margin-top: -40px;border: none;">
-            <a href="{{ route('accountingsettings.index')}}"><option value="" selected>{{ __('Accounting Settings') }} </option><i class="angle fe fe-chevron-down" style="display: block"></i></a>
+            <a href="{{ route('accountingsettings.index')}}"><option value="" selected>{{ __('Accounting Settings') }}</option><i class="angle fe fe-chevron-down" style="display: block"></i></a>
         </select>
     </li>
 @endsection

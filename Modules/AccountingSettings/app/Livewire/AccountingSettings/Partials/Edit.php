@@ -4,8 +4,9 @@ namespace Modules\AccountingSettings\Livewire\AccountingSettings\Partials;
 
 use Modules\Core\Livewire\BaseComponent;
 use Modules\AccountingSettings\Models\AccountingSetting;
-use Modules\AccountingSettings\Livewire\AccountingSettings\GetData;
+use Modules\ChartOfAccounts\Interfaces\AccountServiceInterface;
 
+use Modules\AccountingSettings\Livewire\AccountingSettings\GetData;
 use Modules\AccountingSettings\Http\Requests\AccountingSettingUpdateRequest;
 use Modules\AccountingSettings\Interfaces\AccountingSettingServiceInterface;
 
@@ -33,8 +34,8 @@ class Edit extends BaseComponent
     public ?string $default_value = null;
     public ?string $description = null;
     public ?string $icon = null;
-    public ?string $data_type = '';
-    public ?string $type = '';
+    public string $data_type = '';
+    public string $type = '';
 
 
 
@@ -134,9 +135,15 @@ class Edit extends BaseComponent
         $this->dispatch('refreshData')->to(GetData::class);
     }
 
-    public function render(AccountingSettingServiceInterface $service)
+    public function render(AccountServiceInterface $accountServiceInterface)
     {
+        $filters = [];
+        // $data = $service->All($filters)->with(['children'])->whereNull('parent_id')->get();
+        $dataAccounts = $accountServiceInterface->All($filters)->with(['children', 'journalEntryItems'])->whereNull('parent_id')
+        ->withCount(['children', 'journalEntryItems'])->get();
 
-        return view('accountingsettings::livewire.accountingsettings.partials.form');
+        return view('accountingsettings::livewire.accountingsettings.partials.form',[
+            'dataAccounts' => $dataAccounts,
+        ]);
     }
 }

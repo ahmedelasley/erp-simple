@@ -4,9 +4,10 @@ namespace Modules\AccountingSettings\Models;
 
 use Modules\Core\Models\BaseModel;
 
-use Modules\AccountingSettings\Enums\AccountingSettingDataType;
+use Modules\FiscalYears\Models\FiscalYear;
+use Modules\ChartOfAccounts\Models\Account;
 use Modules\AccountingSettings\Enums\AccountingSettingType;
-
+use Modules\AccountingSettings\Enums\AccountingSettingDataType;
 
 class AccountingSetting extends BaseModel
 {
@@ -24,6 +25,56 @@ class AccountingSetting extends BaseModel
         'type' => AccountingSettingType::class,
     ];
 
+    public function getFormattedKeyAttribute(): string
+    {
+        return str_replace(
+            ' ',
+            ' ',
+            ucwords(str_replace('_', ' ', $this->key))
+        );
+    }
 
+    /**
+     * Get the account associated with the journal entry item.
+     */
+    public function account()
+    {
+        if ($this->type === AccountingSettingType::ACCOUNTS) {
+            return $this->belongsTo(Account::class, 'value');
+        }
+
+        return null;
+    }
+
+    /**
+     * Get the account associated with the journal entry item.
+     */
+    public function accountDefualt()
+    {
+        if ($this->type === AccountingSettingType::ACCOUNTS) {
+            return $this->belongsTo(Account::class, 'default_value');
+        }
+
+        return null;
+    }
+
+    public function fiscalYear()
+    {
+        if ($this->type === AccountingSettingType::FISCAL_YEARS) {
+            return $this->belongsTo(FiscalYear::class, 'value');
+        }
+
+        return null;
+    }
+
+        public function fiscalYearDefualt()
+    {
+        if ($this->type === AccountingSettingType::FISCAL_YEARS) {
+            return $this->belongsTo(FiscalYear::class, 'default_value');
+        }
+
+        return null;
+
+    }
 
 }
