@@ -24,7 +24,7 @@ class CodeGeneratorService
         }
 
         // جلب أكبر قيمة ID بما في ذلك المحذوفين
-        $lastId = $modelClass::withTrashed()->max($column);
+        $lastId = $modelClass::max($column);
 
         $nextNumber = $lastId ? $lastId + 1 : 1;
 
