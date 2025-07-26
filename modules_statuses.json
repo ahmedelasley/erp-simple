@@ -14,5 +14,6 @@
     "FiscalYears": true,
     "AccountTypes": true,
     "AccountingSettings": true,
-    "Settings": true
+    "Settings": true,
+    "Categories": true
 }

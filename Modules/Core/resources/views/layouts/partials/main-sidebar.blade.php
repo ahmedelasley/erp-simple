@@ -31,6 +31,9 @@
             @module('Accounting')
                 @include('accounting::layouts.partials.slide')
             @endmodule
+            @module('Categories')
+                @include('categories::layouts.partials.slide')
+            @endmodule
 
             @module('Settings')
                 @include('settings::layouts.partials.slide')
