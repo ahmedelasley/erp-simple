@@ -34,7 +34,9 @@
             @module('Categories')
                 @include('categories::layouts.partials.slide')
             @endmodule
-
+            @module('Attributes')
+                @include('attributes::layouts.partials.slide')
+            @endmodule
             @module('Settings')
                 @include('settings::layouts.partials.slide')
             @endmodule

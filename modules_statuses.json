@@ -15,5 +15,6 @@
     "AccountTypes": true,
     "AccountingSettings": true,
     "Settings": true,
-    "Categories": true
+    "Categories": true,
+    "Attributes": true
 }

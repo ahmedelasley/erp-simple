@@ -11,6 +11,8 @@
     'isMultiCheckbox' => false,
     'isLabel' => true,
     'isLivewire' => false,
+    'isLivewireMulti' => false,
+    'livewireMulti' => '',
     'isError' => true,
 ])
 
@@ -29,7 +31,11 @@
                 <label class=" rdiobox" for="{{ $name }}-{{ $value }}">
                     <input type="radio" name="{{ $name }}" id="{{ $name }}-{{ $value }}" value="{{ $value }}"
                         @if($isLivewire)
-                            wire:model.live="{{ $name }}"
+                            @if($isLivewireMulti)
+                                wire:model.defer="{{ $livewireMulti }}"
+                            @else
+                                wire:model.live="{{ $name }}"
+                            @endif
                         @endif
                         {{ $attributes->merge(['class' => ' ' . $inputClass]) }} {{ $otherAttributes }}
                     />
@@ -81,9 +87,16 @@
     @endif
 
     @if($isError)
-        @error($name)
-            <small class="bg-danger tx-white d-block px-1 py-1">{{ $message }}</small>
-        @enderror
+        @if($isLivewireMulti)
+            @error($livewireMulti)
+                <small class="bg-danger tx-white d-block px-1 py-1">{{ $message }}</small>
+            @enderror
+        @else
+            @error($name)
+                <small class="bg-danger tx-white d-block px-1 py-1">{{ $message }}</small>
+            @enderror
+        @endif
+
     @endif
 </div>
 
@@ -95,7 +108,7 @@
     :isLivewire="true"
     divClass="custom-class"
     inputClass="input-custom"
-    otherAttributes="data-example='value'" 
+    otherAttributes="data-example='value'"
 />
 
 <x-core::form.fields.input
@@ -106,7 +119,7 @@
     :isLivewire="true"
     divClass="custom-class"
     inputClass="radio-custom"
-    otherAttributes="data-example='value'" 
+    otherAttributes="data-example='value'"
 />
 
 <x-core::form.fields.input
@@ -116,6 +129,6 @@
     :isLivewire="true"
     divClass="custom-class"
     inputClass="checkbox-custom"
-    otherAttributes="data-example='value'" 
+    otherAttributes="data-example='value'"
 />
 --}}
