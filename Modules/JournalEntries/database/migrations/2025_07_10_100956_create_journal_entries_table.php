@@ -24,7 +24,7 @@ return new class extends Migration
                 ->default(JournalEntryStatus::cases()[0]->value)
                 ->index();
             $table->foreignId('fiscal_year_id')->nullable()->constrained('fiscal_years')->onUpdate('cascade')->onDelete('set null'); // foreign key to account_types table
-            $table->timestamps('posted_at');
+            $table->dateTime('posted_at');
 
             // ✅ Polymorphic Relations for auditing
             $table->morphs('creator'); // creator_type, creator_id
