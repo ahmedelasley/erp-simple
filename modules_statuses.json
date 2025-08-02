@@ -16,5 +16,6 @@
     "AccountingSettings": true,
     "Settings": true,
     "Categories": true,
-    "Attributes": true
+    "Attributes": true,
+    "RawMaterials": true
 }

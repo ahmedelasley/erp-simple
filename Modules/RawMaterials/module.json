@@ -1,0 +1,11 @@
+{
+    "name": "RawMaterials",
+    "alias": "rawmaterials",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\RawMaterials\\Providers\\RawMaterialsServiceProvider"
+    ],
+    "files": []
+}
